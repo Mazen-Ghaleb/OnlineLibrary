@@ -90,8 +90,8 @@ function createCarousel(arr,k) {
     }
 }
 
-    var Book1 = new Book("DEEP LEARNING","Ian Goodfellow, Yousha Bengio, and Aaron Courville", "./media/Deep Learning by Ian ,Yousha,& Aaron.jpg","")
-    var Book2 = new Book("DEEP LEARNING","Douwe Osinga","./media/Deep Learning Cookbook.png","")
+    var Book1 = new Book("DEEP LEARNING","Ian Goodfellow, Yousha Bengio, and Aaron Courville", "media/Deep Learning by Ian ,Yousha,& Aaron.jpg","")
+    var Book2 = new Book("DEEP LEARNING","Douwe Osinga","media/Deep Learning Cookbook.png","")
     var Book3 = new Book("HARRY POTTER and the CHAMBER of SECRETS","J.K. ROWLING","media/Harry Potter and the Chamber of Secrets.jpg","")
     var Book4 = new Book("HARRY POTTER and the PHILOSPHER'S STONE","J.K. ROWLING","media/Harry Potter and the Philsopher's Stone.jpg","")
 
