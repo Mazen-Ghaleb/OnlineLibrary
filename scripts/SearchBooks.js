@@ -1,13 +1,21 @@
 function search_books() {
     let search_term = document.getElementById('search-box').value.toLowerCase()
     let search_results = []
-    for (let i = 0; i < arrCommonBooks.length; i++) {
-        if (arrCommonBooks[i].getTitle().toLowerCase().includes(search_term) ||
-            arrCommonBooks[i].getAuthor().toLowerCase().includes(search_term)) {
-            search_results.push(arrCommonBooks[i])
+    let AllBooks = JSON.parse(localStorage.getItem("ALLBooks"));
+    for (let i = 0; i < AllBooks.length; i++) {
+        if (AllBooks[i].Title.toLowerCase().includes(search_term) ||
+            AllBooks[i].Author.toLowerCase().includes(search_term)) {
+            search_results.push(AllBooks[i])
         }
     }
     sessionStorage.setItem(`${search_term}`, JSON.stringify(search_results))
     let path =`../Components/BrowseBooks.html?search_key=${search_term}`
-    window.open(path)
+    // window.location = path;
+    // window.location.href = path;
+    // window.open(path, "_self");
+    // window.location.replace("http://www.w3schools.com");
+    window.open(path);
+    // window.history.pushState('BrowseBooks', 'Search Results', path);
+    
+    return false;
 }

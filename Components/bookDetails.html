@@ -161,12 +161,27 @@
         });
         </script>
         <script src="../scripts/index.js"></script>
+        <script src="../scripts/BookData.js"></script>
+        <script src="../scripts/bookDetails.js"></script>
+        
     </head>
     <body>
       <script>
         generateNavBar();
       </script>
-    <div class="content">
+    
+    <div class="card" style="width: 18rem;margin: 0 auto;float: none;margin-top:10px;margin-bottom: 10px;">
+      <img id="cardBookCover" class="card-img-top" alt="Card image cap">
+      <div class="card-body">
+        <h5 id="cardBookTitle" class="card-title"></h5>
+        <h6 id="cardBookAuthor" class="card-subtitle mb-2 text-muted"></h6>
+        <p id="cardPublishDate" class="card-text"></p>
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+      </div>
+    </div>
+
+<!--   <div class="content">
         <!-- <div id="first-half" class="half">
         <h1>Book Title</h1>
         <h2>Your Book Details</h2>
@@ -272,10 +287,13 @@
         </div> -->
         <div id="second-half" class="half">
           <div class="book-cover">
-          <img src="book.jpg" />
-          <img class="order-now" src="order.jpg"/>
+          <img id="bookCover" src="book.jpg" />
+          <!--<img class="order-now" src="order.jpg"/>-->
           </div>
-          <h3>Click to order your book</h3>
+          <h4 id="title">Title: </h4>
+          <h4 id="author">Author: </h4>
+          <h4 id="publishDate">Publish Date: </h4>
+          <!--<h3>Click to order your book</h3>
           <h4>Published:</h4>
           <h4>Last Update:</h4>
           <h4>Pages:</h4>
@@ -285,7 +303,7 @@
           <h4>eBook Price:</h4>
           <h4>Books Sold:</h4>
           <h4>eBooks Sold:</h4>
-          <h4>Search Engines can{not} see this book<span>Edit</span></h4>
+          <1<h4>Search Engines can{not} see this book<span>Edit</span></h4>
           <h4>Your Book's Categories<span>Edit</span></h4>
           <ul>
             <li>Category 1/Sub-category 1</li>
@@ -295,6 +313,8 @@
             <li>Category 5/Sub-category 5</li>
           </ul>
           <h2 class="delete">Delete This Book</h2>
+        -->
         <div>
+          <script>displayBookDetails();</script>
         </body>
 </html>

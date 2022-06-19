@@ -37,9 +37,31 @@ if (localStorage.getItem("accounts") === null)
     localStorage.setItem("accounts", JSON.stringify(arrAccounts))
 }
 
+// var arrAccounts = JSON.parse(localStorage.getItem("accounts"));
+// for (let i = 0; i < arrAccounts.length; i++)
+//     arrAccounts[i] = User(arrAccounts[i].userName,arrAccounts[i].userMail,arrAccounts[i].userPassword, arrAccounts[i].createDate, arrAccounts[i].role);
+// console.log(arrAccounts)
+
+var arrAccounts = JSON.parse(localStorage.getItem("accounts"));
+console.log(arrAccounts)
+for (let i = 0; i < arrAccounts.length; i++)
+    arrAccounts[i] = new User(arrAccounts[i].userName,
+        arrAccounts[i].userMail,
+        arrAccounts[i].userPassword,
+        arrAccounts[i].createDate,
+        arrAccounts[i].role);
+console.log(arrAccounts)
+
+if (localStorage.getItem("LoggedIn") === null)
+    localStorage.setItem("LoggedIn",JSON.stringify("False"));
+
+   if (localStorage.getItem("AccLoggIn") === null){
+    localStorage.setItem("AccLoggedIn",JSON.stringify(""))
+
+}
+
 function createAccount() {
     accountCreated = true;
-    arrAccounts = JSON.parse(localStorage.getItem("accounts"));
 
     let email = document.getElementById("email").value;
     for(var i = 0 ; i < arrAccounts.length; i++){
@@ -69,14 +91,27 @@ function createAccount() {
             accountCreated = false;
         }
     }
-
+    if(accountCreated){
+        window.location.replace("./SignIn.html");
+        }
     return accountCreated;
 }
 
-function login(email,password) {
+function login(email,password) {    
+    // var arrAccounts = JSON.parse(localStorage.getItem("accounts"));
+    // console.log(arrAccounts)
+    // for (let i = 0; i < arrAccounts.length; i++)
+    //     arrAccounts[i] = new User(arrAccounts[i].userName,
+    //         arrAccounts[i].userMail,
+    //         arrAccounts[i].userPassword,
+    //         arrAccounts[i].createDate,
+    //         arrAccounts[i].role);
+    // console.log(arrAccounts)
+
     found = false;
     logged = false;
-    for(var i =0 ; i<arrAccounts.length;i++){
+
+    for(var i = 0; i<arrAccounts.length; i++){
         if (email === arrAccounts[i].getUserMail()){
             if (password === arrAccounts[i].userPassword) {
                 localStorage.setItem("LoggedIn",JSON.stringify("True"));
@@ -91,11 +126,17 @@ function login(email,password) {
             found = true;
             break;
         }
-    if (!found){
-            document.getElementById('CheckMail').classList.add("notCorrect");
-            document.getElementById('CheckPassword').classList.remove("notCorrect");
-            document.getElementById('CheckMail').innerHTML = 'Email is not matching';
-        }
     }
+
+    if (found === false){
+        document.getElementById('CheckMail').classList.add("notCorrect");
+        document.getElementById('CheckPassword').classList.remove("notCorrect");
+        document.getElementById('CheckMail').innerHTML = 'Email is not matching';
+    }
+
+    if(logged){
+        window.location.replace("../index.html");
+    }
+
     return logged;
 }

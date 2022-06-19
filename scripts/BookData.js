@@ -53,9 +53,10 @@ function createCarousel(arr,k) {
     var i;
     for (i=0;i< arr.length;i++){
 
-        /*  let bookDetailsAnchor = document.createElement('a');
-            bookDetailsAnchor.setAttribute("href", "Components/bookDetails.html/" + arr[i]);
-        */
+        let bookDetailsAnchor = document.createElement('a');
+        bookDetailsAnchor.setAttribute("href", "Components/bookDetails.html?book=" + arr[i].getTitle());
+        
+        
         let CarouselItem = document.createElement('div');
         let CarouselImage = document.createElement('img');
         let CarouselInnerBlock = document.createElement('div');
@@ -69,14 +70,17 @@ function createCarousel(arr,k) {
         BookAuthor.innerText = "by " + Book.getAuthor();
         CarouselInnerBlock.append(BookTitle);
         CarouselInnerBlock.append(BookAuthor);
-        CarouselInnerBlock.classList.add("carousel-caption","d-none","d-md-block");
-
-        CarouselImage.classList.add("d-block","w-100");
+        CarouselInnerBlock.classList.add("carousel-caption");
+        CarouselInnerBlock.classList.add("d-none","d-md-block","carousel-caption");
+        CarouselItem.append(CarouselInnerBlock);
+        
+        bookDetailsAnchor.appendChild(CarouselImage)
         CarouselImage.classList.add("d-block","w-100");
         CarouselImage.src = Book.getImgSrc();
         CarouselImage.alt = Book.getTitle();
-        CarouselItem.append(CarouselImage);
-        CarouselItem.append(CarouselInnerBlock);
+        //CarouselItem.append(CarouselImage);
+        CarouselItem.append(bookDetailsAnchor);
+       
 
         if (i == 0){
             CarouselItem.classList.add("carousel-item","active")
@@ -89,13 +93,25 @@ function createCarousel(arr,k) {
 }
 
     var Book1 = new Book("DEEP LEARNING","Ian Goodfellow, Yousha Bengio, and Aaron Courville", "media/Deep Learning by Ian ,Yousha,& Aaron.jpg","")
-    var Book2 = new Book("DEEP LEARNING","Douwe Osinga","./media/Deep Learning Cookbook.png","")
+    var Book2 = new Book("DEEP LEARNING","Douwe Osinga","media/Deep Learning Cookbook.png","")
     var Book3 = new Book("HARRY POTTER and the CHAMBER of SECRETS","J.K. ROWLING","media/Harry Potter and the Chamber of Secrets.jpg","")
     var Book4 = new Book("HARRY POTTER and the PHILOSPHER'S STONE","J.K. ROWLING","media/Harry Potter and the Philsopher's Stone.jpg","")
+    var Book5 = new Book("HARRY POTTER and the PRISONER of AZAKBAN","J.K. ROWLING","media/Harry Potter and the Prisoner of Azakaban.jpg","")
+    var Book6 = new Book ("HOW TO RAISE AN ANTIRACIST","IBRAM X. KENDI","media/HOW TO RAISE AN ANTIRACIST.jpg","")
+    var Book7 = new Book ("Building a Second Brain","TIAGO FORTE","media/Building a Second Brain.jpg","")
 
-    var arrCommonBooks = [Book1,Book2,Book3,Book4]
+    
+    var CommonBooks = [Book3,Book4,Book5];
+    var EducationalBooks = [Book1,Book2];
+    var NewBooks = [Book6,Book7];
+    var AllBooks = CommonBooks.concat(EducationalBooks,NewBooks);
 
-    createCarousel(arrCommonBooks,1)
-    createCarousel(arrCommonBooks,2)
-    createCarousel(arrCommonBooks,3)
+
+    localStorage.setItem("ALLBooks", JSON.stringify(AllBooks))
+
+    createCarousel(CommonBooks,1)
+    createCarousel(NewBooks,2)
+    createCarousel(EducationalBooks,3)
+
+
 

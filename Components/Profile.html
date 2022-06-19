@@ -16,7 +16,7 @@
         font-size: 18px;
       }
 
-      button {
+      #contactButton {
         border: none;
         outline: 0;
         display: inline-block;
@@ -35,7 +35,7 @@
         color: black;
       }
 
-      button:hover,
+      #contactButton:hover,
       a:hover {
         opacity: 0.7;
       }
@@ -45,6 +45,8 @@
   <body>
     <script>
       generateNavBar();
+      display_account_data();
+      displayBookDetails();
     </script>
     <h2 style="text-align: center">User Profile Card</h2>
 
@@ -57,7 +59,7 @@
         <a href="#"><i class="fa fa-facebook"></i></a>
         <a href="#"><i class="fa fa-twitter"></i></a>
       </div>
-      <p><button>Contact +20 106 887 0000</button></p>
+      <p><button id="contactButton">Contact +20 106 887 0000</button></p>
     </div>
   </body>
 </html>

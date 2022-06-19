@@ -20,6 +20,8 @@ function createCarousel(arr) {
         /*  let bookDetailsAnchor = document.createElement('a');
             bookDetailsAnchor.setAttribute("href", "Components/bookDetails.html/" + arr[i]);
         */
+        let bookDetailsAnchor = document.createElement('a');
+        bookDetailsAnchor.setAttribute("href", "bookDetails.html?book=" + arr[i].Title);
         let CarouselItem = document.createElement('div');
         let CarouselImage = document.createElement('img');
         let CarouselInnerBlock = document.createElement('div');
@@ -34,13 +36,15 @@ function createCarousel(arr) {
         CarouselInnerBlock.append(BookTitle);
         CarouselInnerBlock.append(BookAuthor);
         CarouselInnerBlock.classList.add("carousel-caption","d-none","d-md-block");
+        bookDetailsAnchor.appendChild(CarouselImage)
 
         CarouselImage.classList.add("d-block","w-100");
         CarouselImage.classList.add("d-block","w-100");
         CarouselImage.src = '../' + Book.imgSrc;
         
         CarouselImage.alt = Book.Title;
-        CarouselItem.append(CarouselImage);
+        // CarouselItem.append(CarouselImage);
+        CarouselItem.append(bookDetailsAnchor);
         CarouselItem.append(CarouselInnerBlock);
 
         if (i == 0){
@@ -61,5 +65,5 @@ if (search_results.length != 0){
 }
 else{
     let display_div = document.getElementById('display-div')
-    display_div.innerHTML = '<P>No Results found</p>'
+    display_div.innerHTML = '<p>No Results found</p>'
 }
