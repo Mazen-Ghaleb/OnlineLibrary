@@ -47,21 +47,29 @@ function generateNav() {
     "bg-dark",
     "justify-content-between"
   );
-  if (JSON.parse(localStorage.getItem("LoggedIn")) === "True"){
+  //if (JSON.parse(localStorage.getItem("LoggedIn")) === "True"){
   nav.innerHTML = `
   <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllBooksBtn">
     <a class="navbar-brand" href="${pathRoot}/index.html">The Online Library</a>
   </button>
-    
+
 
     <div style="display:inline; id=profile-container">
         <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllBooksBtn">
           <a href="${pathRoot}/Components/browseAllBooks.html">Books</a>
         </button>
-        <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllMembersBtn">
-          <a href="${pathRoot}/Components/browseAllMembers.html">Members</a>
-        </button>
-      </div>
+
+        ${((JSON.parse(localStorage.getItem("LoggedIn")) === "True" && JSON.parse(localStorage.getItem("AccLoggedIn")).role === "Admin")?
+         `<button class="btn btn-outline-success my-2 my-sm-0" id="browseAllMembersBtn">
+        <a href="${pathRoot}/Components/browseAllMembers.html">Members</a>
+      </button>
+      <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllMembersBtn">
+        <a href="${pathRoot}/Components/bookAddition.html">Add Book</a>
+      </button>
+    ` : ``)}
+    </div>
+    
+        
 
     <form class="form-inline" onsubmit="return search_books()">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-box" />
@@ -76,32 +84,32 @@ function generateNav() {
       </div>
     </form>
   `;
-  }
-  else {nav.innerHTML = `
-  <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllBooksBtn">
-    <a class="navbar-brand" href="${pathRoot}/index.html">The Online Library</a>
-  </button>
+ // }
+  //else {nav.innerHTML = `
+  // <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllBooksBtn">
+  //   <a class="navbar-brand" href="${pathRoot}/index.html">The Online Library</a>
+  // </button>
     
 
-    <div style="display:inline; id=profile-container">
-        <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllBooksBtn">
-          <a href="${pathRoot}/Components/browseAllBooks.html">Books</a>
-        </button>
-      </div>
+  //   <div style="display:inline; id=profile-container">
+  //       <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllBooksBtn">
+  //         <a href="${pathRoot}/Components/browseAllBooks.html">Books</a>
+  //       </button>
+  //     </div>
 
-    <form class="form-inline" onsubmit="return search_books()">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-box" />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      <div style="display:inline; id=profile-container">
-        <button class="btn btn-outline-success my-2 my-sm-0" id="signIn">
-          <a href="${pathRoot}/Components/SignIn.html">Sign In</a>
-        </button>
-        <button class="btn btn-outline-success my-2 my-sm-0" id="signUp">
-          <a href="${pathRoot}/Components/SignUp.html">Sign Up</a>
-        </button>
-      </div>
-    </form>
-  `;}
+  //   <form class="form-inline" onsubmit="return search_books()">
+  //     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-box" />
+  //     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  //     <div style="display:inline; id=profile-container">
+  //       <button class="btn btn-outline-success my-2 my-sm-0" id="signIn">
+  //         <a href="${pathRoot}/Components/SignIn.html">Sign In</a>
+  //       </button>
+  //       <button class="btn btn-outline-success my-2 my-sm-0" id="signUp">
+  //         <a href="${pathRoot}/Components/SignUp.html">Sign Up</a>
+  //       </button>
+  //     </div>
+  //   </form>
+  // `;}
   return nav;
 }
 
@@ -159,4 +167,10 @@ function sign_out(goBack) {
   document.body.prepend(generateNav());
 
   if(goBack) goBack();//window.history.back();
+}
+
+function goToPage (path){
+  alink = document.createElement("a");
+  alink.href=path;
+  alink.click();
 }

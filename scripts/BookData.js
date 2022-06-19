@@ -61,7 +61,7 @@ function createCarousel(arr,k) {
     for (i=0;i< arr.length;i++){
 
         let bookDetailsAnchor = document.createElement('a');
-        bookDetailsAnchor.setAttribute("href", "Components/bookDetails.html?book=" + arr[i].getTitle());
+        bookDetailsAnchor.setAttribute("href", "Components/bookDetails.html?book=" + arr[i].Title);
         
         
         let CarouselItem = document.createElement('div');
@@ -73,8 +73,8 @@ function createCarousel(arr,k) {
 
         BookTitle.style.cssText = "-webkit-text-stroke-width: 0.25px; -webkit-text-stroke-color: black;"
         BookAuthor.style.cssText = "-webkit-text-stroke-width: 0.25px; -webkit-text-stroke-color: black;"
-        BookTitle.innerText = Book.getTitle();
-        BookAuthor.innerText = "by " + Book.getAuthor();
+        BookTitle.innerText = Book.Title;
+        BookAuthor.innerText = "by " + Book.Author;
         CarouselInnerBlock.append(BookTitle);
         CarouselInnerBlock.append(BookAuthor);
         CarouselInnerBlock.classList.add("carousel-caption");
@@ -83,8 +83,8 @@ function createCarousel(arr,k) {
         
         bookDetailsAnchor.appendChild(CarouselImage)
         CarouselImage.classList.add("d-block","w-100");
-        CarouselImage.src = Book.getImgSrc();
-        CarouselImage.alt = Book.getTitle();
+        CarouselImage.src = Book.imgSrc;
+        CarouselImage.alt = Book.Title;
         //CarouselItem.append(CarouselImage);
         CarouselItem.append(bookDetailsAnchor);
        
@@ -99,43 +99,58 @@ function createCarousel(arr,k) {
     }
 }
 
-    if (localStorage.getItem("ALLBooks") === null ||
-        localStorage.getItem("CommonBooks") === null ||
-        localStorage.getItem("EducationalBooks") === null ||
-        localStorage. getItem("NewBooks") === null)
+    if (localStorage.getItem("ALLBooks") === null)
     {
         var Book1 = new Book("DEEP LEARNING","Ian Goodfellow, Yousha Bengio, and Aaron Courville","Educational",
         "media/Deep Learning by Ian ,Yousha,& Aaron.jpg","")
-        var Book2 = new Book("DEEP LEARNING","Douwe Osinga", "Educational","media/Deep Learning Cookbook.png","")
+
+        var Book2 = new Book("DEEP LEARNING","Douwe Osinga", "Educational",
+        "media/Deep Learning Cookbook.png","")
+
         var Book3 = new Book("HARRY POTTER and the CHAMBER of SECRETS","J.K. ROWLING", "Common",
         "media/Harry Potter and the Chamber of Secrets.jpg","")
+
         var Book4 = new Book("HARRY POTTER and the PHILOSPHER'S STONE","J.K. ROWLING", "Common",
         "media/Harry Potter and the Philsopher's Stone.jpg","")
+        
         var Book5 = new Book("HARRY POTTER and the PRISONER of AZAKBAN","J.K. ROWLING", "Common",
         "media/Harry Potter and the Prisoner of Azakaban.jpg","")
+
         var Book6 = new Book ("HOW TO RAISE AN ANTIRACIST","IBRAM X. KENDI", "New",
         "media/HOW TO RAISE AN ANTIRACIST.jpg","")
+
         var Book7 = new Book ("Building a Second Brain","TIAGO FORTE", "New",
         "media/Building a Second Brain.jpg","")
+
         var ALLBooks = [Book1, Book2, Book3, Book4, Book5, Book6, Book7] 
         JSON.setItem(localStorage.setItem("ALLBooks", JSON.stringify(ALLBooks)))
     }else{
         var ALLBooks = JSON.parse(localStorage.getItem("ALLBooks"))
     }
-    var ALLBooks = JSON.parse(localStorage.getItem("ALLBooks"))
-    var commonBooks = []
-    var EducationalBooks = []
-    var NewBooks = []
-    for(let i = 0; i < AllBooks.length; i++){
-        //let book = 
-    }
-    CommonBooks = JSON.parse(localStorage.getItem("CommonBooks"));
-    EducationalBooks = JSON.parse(localStorage.getItem("EducationalBooks"));
-    NewBooks = JSON.parse(localStorage.getItem("NewBooks"));
 
-    createCarousel(CommonBooks,1)
-    createCarousel(NewBooks,2)
-    createCarousel(EducationalBooks,3)
+    var commonBooks = []
+    var educationalBooks = []
+    var newBooks = []
+    for(let i = 0; i < ALLBooks.length; i++){
+        if (ALLBooks[i].Category === "Common"){
+            commonBooks.push(ALLBooks[i]);
+        }else if (ALLBooks[i].Category === "New"){
+            newBooks.push(ALLBooks[i]);
+
+        }else if (ALLBooks[i].Category === "Educational"){
+            educationalBooks.push(ALLBooks[i]);
+
+        }
+    }
+
+    console.log(ALLBooks)
+    console.log(commonBooks)
+    console.log(newBooks)
+    console.log(educationalBooks)
+
+    createCarousel(commonBooks,1)
+    createCarousel(newBooks,2)
+    createCarousel(educationalBooks,3)
 
 
 

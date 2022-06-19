@@ -7,7 +7,7 @@ function generateCardsForAllMembers(){
     for (const account of allAccounts){
         let acc = UserFromJson(account);
         cardsDiv.innerHTML += `
-        <div class="card" style="width:14em; height: 32em; margin-top: 10px; margin-bottom: 10px;">
+        <div class="card" style="width:16em; height: 32em; margin-top: 10px; margin-bottom: 10px;">
         <img id="cardMemeberProfile" width:10em; class="card-img-top" alt="Card member cap" src="../media/profile.png">
         <div class="card-body">
           <h5 id="card" class="card-title">${acc.getUserName()}</h5>

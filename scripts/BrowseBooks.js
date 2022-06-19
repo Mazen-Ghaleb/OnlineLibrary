@@ -40,7 +40,7 @@ function createCarousel(arr) {
 
         CarouselImage.classList.add("d-block","w-100");
         CarouselImage.classList.add("d-block","w-100");
-        CarouselImage.src = '../' + Book.imgSrc;
+        CarouselImage.src = (Book.imgSrc.includes("media/")? ("../" + Book.imgSrc) : Book.imgSrc);
         
         CarouselImage.alt = Book.Title;
         // CarouselItem.append(CarouselImage);

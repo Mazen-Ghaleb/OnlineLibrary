@@ -1,16 +1,14 @@
 function add_book(){
     let author = document.getElementById('book-author').value
     let title = document.getElementById('book-title').value
-    let date = new Date().getDate()
-    let cover_image = document.querySelectorAll('input[type=file]')[0].files[0]
-    var url = window.URL.createObjectURL(cover_image);
-    var anchor = document.createElement("a");
-    anchor.href = url;
-    console.log(url)
-    anchor.download = `../media/${title}.jpg`
-    anchor.click()
-    return false;
-
+    let date = new Date()
+    date = date.toDateString();
+    let imgSrc = document.getElementById('cover-link').value
+    let category = document.getElementById('book-category').value
+    let book = {Title:title, Author:author, Date:date, imgSrc:imgSrc, Category:category}
+    let AllBooks = JSON.parse(localStorage.getItem("ALLBooks"))
+    AllBooks.push(book)
+    localStorage.setItem("ALLBooks", JSON.stringify(AllBooks));
 }
 
 

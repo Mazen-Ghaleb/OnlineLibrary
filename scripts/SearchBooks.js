@@ -10,12 +10,6 @@ function search_books() {
     }
     sessionStorage.setItem(`${search_term}`, JSON.stringify(search_results))
     let path =`../Components/BrowseBooks.html?search_key=${search_term}`
-    // window.location = path;
-    // window.location.href = path;
-    // window.open(path, "_self");
-    // window.location.replace("http://www.w3schools.com");
-    window.open(path);
-    // window.history.pushState('BrowseBooks', 'Search Results', path);
-    
+    window.location.assign(path);
     return false;
 }

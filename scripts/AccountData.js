@@ -93,7 +93,7 @@ function createAccount() {
         }
     }
     if(accountCreated){
-        window.location.replace("./SignIn.html");
+        window.location.assign("./SignIn.html");
         }
     return accountCreated;
 }
@@ -136,7 +136,11 @@ function login(email,password) {
     }
 
     if(logged){
-        window.location.replace("../index.html");
+        goToPage("../index.html")
+        // alink = document.createElement("a");
+        // alink.href="../index.html";
+        // alink.click();
+        //window.location.assign("../index.html");
     }
 
     return logged;
