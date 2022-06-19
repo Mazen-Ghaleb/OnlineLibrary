@@ -7,11 +7,12 @@
   </head>
   <body>
     <script>
+      if (JSON.parse(localStorage.getItem("LoggedIn")) !== "True") window.close();
       generateNavBar();
-      display_account_data(true);// FIXME return to index if not logged in
-      if (JSON.parse(localStorage.getItem("LoggedIn")) === "False") window.history.back(); // FIXME return to index on sign out
+      display_account_data(()=>{ window.close(); });// FIXME return to index if not logged in
     </script>
     
+    <br>
     <h2 style="text-align: center">User Profile Card</h2>
     <div class="card" style="width: 18rem;margin: 0 auto;float: none;margin-top:10px;margin-bottom: 10px;">
       <img id="profilePicture" class="card-img-top" alt="Card image cap" style="border:2px solid black;">
@@ -23,6 +24,11 @@
 
         <p id="cardPublishDate" class="card-text"></p>
       </div>
+      
+      <form action="../Components/ResetPassword.html" style="margin: 0px 10px 10px 10px">
+        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Reset Password</button>
+        <!-- <input type="submit" style="margin: 10px 10px 10px 10px" class="btn btn-outline-danger my-2 my-sm-0" value="Reset Password"> -->
+      </form>
     </div>
     <script>display_Profile_details();</script>
   </body>

@@ -1,8 +1,9 @@
-function Book(Title, Author, imgSrc, Date) {
+function Book(Title, Author, Category,imgSrc, Date) {
     this.Title = Title;
     this.Author = Author;
     this.imgSrc = imgSrc;
-    this.Date= Date;
+    this.Date = Date;
+    this.Category = Category;
 
     this.getTitle = function() {
         return this.Title;
@@ -20,6 +21,9 @@ function Book(Title, Author, imgSrc, Date) {
         return this.Date;
     }
 
+    this.getCategory = function(){
+        return this.getCategory();
+    }
 
     this.setTitle = function(title) {
          this.Title = title;
@@ -35,6 +39,9 @@ function Book(Title, Author, imgSrc, Date) {
     
     this.setDate = function(Date) {
         this.Date = Date;
+    }
+    this.setCategory = function(category){
+       this.category = category;
     }
 }
 
@@ -92,22 +99,39 @@ function createCarousel(arr,k) {
     }
 }
 
-    var Book1 = new Book("DEEP LEARNING","Ian Goodfellow, Yousha Bengio, and Aaron Courville", "media/Deep Learning by Ian ,Yousha,& Aaron.jpg","")
-    var Book2 = new Book("DEEP LEARNING","Douwe Osinga","media/Deep Learning Cookbook.png","")
-    var Book3 = new Book("HARRY POTTER and the CHAMBER of SECRETS","J.K. ROWLING","media/Harry Potter and the Chamber of Secrets.jpg","")
-    var Book4 = new Book("HARRY POTTER and the PHILOSPHER'S STONE","J.K. ROWLING","media/Harry Potter and the Philsopher's Stone.jpg","")
-    var Book5 = new Book("HARRY POTTER and the PRISONER of AZAKBAN","J.K. ROWLING","media/Harry Potter and the Prisoner of Azakaban.jpg","")
-    var Book6 = new Book ("HOW TO RAISE AN ANTIRACIST","IBRAM X. KENDI","media/HOW TO RAISE AN ANTIRACIST.jpg","")
-    var Book7 = new Book ("Building a Second Brain","TIAGO FORTE","media/Building a Second Brain.jpg","")
-
-    
-    var CommonBooks = [Book3,Book4,Book5];
-    var EducationalBooks = [Book1,Book2];
-    var NewBooks = [Book6,Book7];
-    var AllBooks = CommonBooks.concat(EducationalBooks,NewBooks);
-
-
-    localStorage.setItem("ALLBooks", JSON.stringify(AllBooks))
+    if (localStorage.getItem("ALLBooks") === null ||
+        localStorage.getItem("CommonBooks") === null ||
+        localStorage.getItem("EducationalBooks") === null ||
+        localStorage. getItem("NewBooks") === null)
+    {
+        var Book1 = new Book("DEEP LEARNING","Ian Goodfellow, Yousha Bengio, and Aaron Courville","Educational",
+        "media/Deep Learning by Ian ,Yousha,& Aaron.jpg","")
+        var Book2 = new Book("DEEP LEARNING","Douwe Osinga", "Educational","media/Deep Learning Cookbook.png","")
+        var Book3 = new Book("HARRY POTTER and the CHAMBER of SECRETS","J.K. ROWLING", "Common",
+        "media/Harry Potter and the Chamber of Secrets.jpg","")
+        var Book4 = new Book("HARRY POTTER and the PHILOSPHER'S STONE","J.K. ROWLING", "Common",
+        "media/Harry Potter and the Philsopher's Stone.jpg","")
+        var Book5 = new Book("HARRY POTTER and the PRISONER of AZAKBAN","J.K. ROWLING", "Common",
+        "media/Harry Potter and the Prisoner of Azakaban.jpg","")
+        var Book6 = new Book ("HOW TO RAISE AN ANTIRACIST","IBRAM X. KENDI", "New",
+        "media/HOW TO RAISE AN ANTIRACIST.jpg","")
+        var Book7 = new Book ("Building a Second Brain","TIAGO FORTE", "New",
+        "media/Building a Second Brain.jpg","")
+        var ALLBooks = [Book1, Book2, Book3, Book4, Book5, Book6, Book7] 
+        JSON.setItem(localStorage.setItem("ALLBooks", JSON.stringify(ALLBooks)))
+    }else{
+        var ALLBooks = JSON.parse(localStorage.getItem("ALLBooks"))
+    }
+    var ALLBooks = JSON.parse(localStorage.getItem("ALLBooks"))
+    var commonBooks = []
+    var EducationalBooks = []
+    var NewBooks = []
+    for(let i = 0; i < AllBooks.length; i++){
+        //let book = 
+    }
+    CommonBooks = JSON.parse(localStorage.getItem("CommonBooks"));
+    EducationalBooks = JSON.parse(localStorage.getItem("EducationalBooks"));
+    NewBooks = JSON.parse(localStorage.getItem("NewBooks"));
 
     createCarousel(CommonBooks,1)
     createCarousel(NewBooks,2)

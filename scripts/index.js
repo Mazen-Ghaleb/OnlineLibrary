@@ -35,32 +35,33 @@ function generateNavBar() {
   crossorigin="anonymous"
 ></script>
   `;
+  document.body.append(generateNav());
+}
 
+function generateNav() {
+  
   let nav = document.createElement("nav");
   nav.classList.add(
     "navbar",
-    "navbar-light",
-    "bg-light",
+    "navbar-dark",
+    "bg-dark",
     "justify-content-between"
   );
+  if (JSON.parse(localStorage.getItem("LoggedIn")) === "True"){
   nav.innerHTML = `
-    <a class="navbar-brand navbar-expand-lg">Navbar</a>
-    <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-  </div>
+  <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllBooksBtn">
+    <a class="navbar-brand" href="${pathRoot}/index.html">The Online Library</a>
+  </button>
+    
+
+    <div style="display:inline; id=profile-container">
+        <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllBooksBtn">
+          <a href="${pathRoot}/Components/browseAllBooks.html">Books</a>
+        </button>
+        <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllMembersBtn">
+          <a href="${pathRoot}/Components/browseAllMembers.html">Members</a>
+        </button>
+      </div>
 
     <form class="form-inline" onsubmit="return search_books()">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-box" />
@@ -75,8 +76,35 @@ function generateNavBar() {
       </div>
     </form>
   `;
-  document.body.append(nav);
+  }
+  else {nav.innerHTML = `
+  <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllBooksBtn">
+    <a class="navbar-brand" href="${pathRoot}/index.html">The Online Library</a>
+  </button>
+    
+
+    <div style="display:inline; id=profile-container">
+        <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllBooksBtn">
+          <a href="${pathRoot}/Components/browseAllBooks.html">Books</a>
+        </button>
+      </div>
+
+    <form class="form-inline" onsubmit="return search_books()">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-box" />
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <div style="display:inline; id=profile-container">
+        <button class="btn btn-outline-success my-2 my-sm-0" id="signIn">
+          <a href="${pathRoot}/Components/SignIn.html">Sign In</a>
+        </button>
+        <button class="btn btn-outline-success my-2 my-sm-0" id="signUp">
+          <a href="${pathRoot}/Components/SignUp.html">Sign Up</a>
+        </button>
+      </div>
+    </form>
+  `;}
+  return nav;
 }
+
 
 function display_account_data(goBack) {
   if (JSON.parse(localStorage.getItem("LoggedIn")) !== "True") return;
@@ -96,8 +124,7 @@ function display_account_data(goBack) {
   <button class="btn btn-outline-success my-2 my-sm-0" id="signOut" onclick="sign_out(${goBack})">Sign Out</button>
   `;
 
-  container.style.display = "inline";
-
+  container.style.display = "inline"; 
   parent_node.appendChild(container);
 
 }
@@ -107,29 +134,29 @@ function sign_out(goBack) {
   localStorage.setItem("AccLoggedIn", JSON.stringify(""));
   document.getElementsByTagName("nav")[0].remove();
 
-  let nav = document.createElement("nav");
-  nav.classList.add(
-    "navbar",
-    "navbar-light",
-    "bg-light",
-    "justify-content-between"
-  );
-  nav.innerHTML = `
-  <a class="navbar-brand">Navbar</a>
-  <form class="form-inline" onsubmit="return search_books()">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-box" />
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    <div style="display:inline; id=profile-container">
-      <button class="btn btn-outline-success my-2 my-sm-0" id="signIn">
-        <a href="${pathRoot}/Components/SignIn.html">Sign In</a>
-      </button>
-      <button class="btn btn-outline-success my-2 my-sm-0" id="signUp">
-        <a href="${pathRoot}/Components/SignUp.html">Sign Up</a>
-      </button>
-    </div>
-  </form>
-  `;
-  document.body.prepend(nav);
+  // let nav = document.createElement("nav");
+  // nav.classList.add(
+  //   "navbar",
+  //   "navbar-light",
+  //   "bg-light",
+  //   "justify-content-between"
+  // );
+  // nav.innerHTML = `
+  // <a class="navbar-brand">The Online Library</a>
+  // <form class="form-inline" onsubmit="return search_books()">
+  //   <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-box" />
+  //   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  //   <div style="display:inline; id=profile-container">
+  //     <button class="btn btn-outline-success my-2 my-sm-0" id="signIn">
+  //       <a href="${pathRoot}/Components/SignIn.html">Sign In</a>
+  //     </button>
+  //     <button class="btn btn-outline-success my-2 my-sm-0" id="signUp">
+  //       <a href="${pathRoot}/Components/SignUp.html">Sign Up</a>
+  //     </button>
+  //   </div>
+  // </form>
+  // `;
+  document.body.prepend(generateNav());
 
-  if(goBack === true) window.history.back();
+  if(goBack) goBack();//window.history.back();
 }

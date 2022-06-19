@@ -15,7 +15,7 @@ function User(userName,userMail,userPassword, createDate, role="Member"){
         return this.createDate;
     }
     this.getRole = function () {
-        return this.createDate;
+        return this.role;
     }
 
     this.setUserName = function (userName) {
@@ -163,11 +163,12 @@ function resetPassword(oldPassword,newPassword,repeatPassword) {
             if (oldPassword === arrAccounts[i].userPassword) {
                 arrAccounts[i].userPassword = newPassword;
                 localStorage.setItem("AccLoggedIn",JSON.stringify(arrAccounts[i]))
+                localStorage.setItem("accounts", JSON.stringify(arrAccounts))
                 changed = true;
             }
             else {
                 document.getElementById('OldPass').style.color = 'red';
-                document.getElementById('CheckPass').innerHTML = 'Old password is not matching';
+                document.getElementById('OldPass').innerHTML = 'Old password is not matching';
                 changed = false;
             }
             break;
