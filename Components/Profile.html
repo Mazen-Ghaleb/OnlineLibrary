@@ -2,64 +2,28 @@
 <html>
   <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <style>
-      .card {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        max-width: 300px;
-        margin: auto;
-        text-align: center;
-        font-family: arial;
-      }
-
-      .title {
-        color: grey;
-        font-size: 18px;
-      }
-
-      #contactButton {
-        border: none;
-        outline: 0;
-        display: inline-block;
-        padding: 8px;
-        color: white;
-        background-color: #000;
-        text-align: center;
-        cursor: pointer;
-        width: 100%;
-        font-size: 18px;
-      }
-
-      a {
-        text-decoration: none;
-        font-size: 22px;
-        color: black;
-      }
-
-      #contactButton:hover,
-      a:hover {
-        opacity: 0.7;
-      }
-    </style>
     <script src="../scripts/index.js"></script>
+    <script src="../scripts/profileDetails.js"></script>
   </head>
   <body>
     <script>
       generateNavBar();
-      display_account_data();
-      displayBookDetails();
+      display_account_data(true);// FIXME return to index if not logged in
+      if (JSON.parse(localStorage.getItem("LoggedIn")) === "False") window.history.back(); // FIXME return to index on sign out
     </script>
+    
     <h2 style="text-align: center">User Profile Card</h2>
+    <div class="card" style="width: 18rem;margin: 0 auto;float: none;margin-top:10px;margin-bottom: 10px;">
+      <img id="profilePicture" class="card-img-top" alt="Card image cap" style="border:2px solid black;">
+      <div class="card-body">
+        <h5 id="cardName" class="card-title"></h5>
+        <p id="cardEmail" class="card-subtitle mb-2 text-muted"></p>
+        <p id="cardPublishDate" class="card-text"></p>
+        <p id="cardRole" class="card-text"></p>
 
-    <div class="card">
-      <img src="./media/profile.png" alt="Profile image" style="width: 100%" />
-      <h1>Youssef Maher</h1>
-      <p class="title">Deep Learning Student</p>
-      <p>Ain Shams University</p>
-      <div style="margin: 24px 0">
-        <a href="#"><i class="fa fa-facebook"></i></a>
-        <a href="#"><i class="fa fa-twitter"></i></a>
+        <p id="cardPublishDate" class="card-text"></p>
       </div>
-      <p><button id="contactButton">Contact +20 106 887 0000</button></p>
     </div>
+    <script>display_Profile_details();</script>
   </body>
 </html>

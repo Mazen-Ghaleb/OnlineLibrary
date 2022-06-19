@@ -26,9 +26,14 @@ function User(userName,userMail,userPassword, createDate, role="Member"){
     }
 }
 
+function UserFromJson(json)
+{
+    return new User(json.userName, json.userMail, json.userPassword, json.createDate, json.role);
+}
+
 if (localStorage.getItem("accounts") === null)
 {
-    var adminAccount = new User("Admin","admin@admin.com","admin","","Admin");
+    var adminAccount = new User("Admin","admin@admin.com","admin","Forever","Admin");
     var Account1 = new User("Youssef","ymaher@912.com","YMAHER99_DOTa2@su","19-06-2022");
     var Account2 = new User("Mazen","mazen@mazen.com","Mazeeeeeen","19-06-2022");
     var Account3 = new User("Lotfy","lotfy@lotfy.com","LOTFYYYYY","19-06-2022");
@@ -45,23 +50,19 @@ if (localStorage.getItem("accounts") === null)
 var arrAccounts = JSON.parse(localStorage.getItem("accounts"));
 console.log(arrAccounts)
 for (let i = 0; i < arrAccounts.length; i++)
-    arrAccounts[i] = new User(arrAccounts[i].userName,
-        arrAccounts[i].userMail,
-        arrAccounts[i].userPassword,
-        arrAccounts[i].createDate,
-        arrAccounts[i].role);
+    arrAccounts[i] = UserFromJson(arrAccounts[i]);
 console.log(arrAccounts)
 
 if (localStorage.getItem("LoggedIn") === null)
-    localStorage.setItem("LoggedIn",JSON.stringify("False"));
+    localStorage.setItem("LoggedIn", JSON.stringify("False"));
 
-   if (localStorage.getItem("AccLoggIn") === null){
-    localStorage.setItem("AccLoggedIn",JSON.stringify(""))
-
-}
+if (localStorage.getItem("AccLoggedIn") === null)
+    localStorage.setItem("AccLoggedIn", JSON.stringify(""));
 
 function createAccount() {
     accountCreated = true;
+    document.getElementById('CheckMail').innerHTML = '';
+    document.getElementById('CheckPass').innerHTML = '';
 
     let email = document.getElementById("email").value;
     for(var i = 0 ; i < arrAccounts.length; i++){
@@ -139,4 +140,39 @@ function login(email,password) {
     }
 
     return logged;
+}
+
+function resetPassword(oldPassword,newPassword,repeatPassword) {
+    changed = false;
+    
+    document.getElementById('OldPass').innerHTML = '';
+    document.getElementById('CheckPass').innerHTML = '';
+
+    if(newPassword !== repeatPassword)
+    {
+        document.getElementById('CheckPass').style.color = 'red';
+        document.getElementById('CheckPass').innerHTML = 'Password is not matching';
+        return false;
+    }
+
+    let loggedInUser = UserFromJson(JSON.parse(localStorage.getItem("AccLoggedIn")));
+    let email = loggedInUser.getUserMail();
+
+    for(var i = 0; i<arrAccounts.length; i++){
+        if (email === arrAccounts[i].getUserMail()){
+            if (oldPassword === arrAccounts[i].userPassword) {
+                arrAccounts[i].userPassword = newPassword;
+                localStorage.setItem("AccLoggedIn",JSON.stringify(arrAccounts[i]))
+                changed = true;
+            }
+            else {
+                document.getElementById('OldPass').style.color = 'red';
+                document.getElementById('CheckPass').innerHTML = 'Old password is not matching';
+                changed = false;
+            }
+            break;
+        }
+    }
+
+    return changed;
 }
