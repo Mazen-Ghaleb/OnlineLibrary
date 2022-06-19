@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>Sign In</title>
+        <link rel="stylesheet" type="text/css" href="../styles/Sign.css">
+        <script src="../scripts/index.js"></script>
+    </head>
+    <body style="background: rgb(0,131,150);background: radial-gradient(circle, rgba(0,131,150,1) 0%, rgba(0,36,77,1) 100%);">
+      <script>
+        generateNavBar();
+      </script>
+      <script type= "text/javascript" src="../scripts/AccountData.js"></script>
+    <form onsubmit="return login(this.email.value,this.psw.value)" action="../index.html" style="border:1px solid #ccc">
+        <div class="container">
+          <h1 style="color:white;">Sign in</h1>
+          <p style="color:white;">Enter your account details</p>
+          <hr>
+        </br>
+          <label style="color:white;" for="email"><b>Email</b></label>
+          <input type="email" placeholder="Enter Email" id="email" name="email" required>
+          <span id='CheckMail'></span>
+        </br>
+      
+          <label style="color:white;" for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" id="psw" name="psw" required>
+          <span id='CheckPassword'></span>
+        </br>
+            
+          <div class="clearfix">
+            <button type="button" class="cancelbtn buttonNorm" onclick="window.history.back()">Cancel</button>
+            <button type="submit" class="signupbtn buttonNorm">Sign In</button>
+          </div>
+        </div>
+      </form>
+    </body>
+</html>

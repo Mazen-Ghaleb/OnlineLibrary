@@ -1,49 +1,65 @@
-// function Book(title, image_url, author){
-//     this.title = title;
-//     this.image_url = image_url;
-//     this.author = author;
-// }
+function createCarousel(arr) {
+    let display_div = document.getElementById('display-div')
 
+    display_div.innerHTML = `  <h1 style="text-align: center; margin: 1% 0% 1% 0%; color: white">Search Results</h1>
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner" id="CarouselBooks"></div>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>`
 
-// var g_books = [
-//     new Book("Harry Potter and the Philsopher's Stone", "./media/HarryPotterandthePhilsopher'sStone.jpg", "J.K.Rowling"),
-//     new Book("Harry Potter and the Chamber of Secrets", "./media/HarryPotterandtheChamberofSecrets.jpg", "J.K.Rowling"),
-//     new Book("Harry Potter and the Prisoner of Azakaban", "./media/HarryPotterandthePrisonerofAzakaban.jpg", "J.K.Rowling"),
-//     new Book("Harry Potter and the Philsopher's Stone", "./media/HarryPotterandthePhilsopher'sStone.jpg", "J.K.Rowling"),
-//     new Book("Harry Potter and the Chamber of Secrets", "./media/HarryPotterandtheChamberofSecrets.jpg", "J.K.Rowling"),
-//     new Book("Harry Potter and the Prisoner of Azakaban", "./media/HarryPotterandthePrisonerofAzakaban.jpg", "J.K.Rowling"),
-//     new Book("Harry Potter and the Philsopher's Stone", "./media/HarryPotterandthePhilsopher'sStone.jpg", "J.K.Rowling"),
-//     new Book("Harry Potter and the Chamber of Secrets", "./media/HarryPotterandtheChamberofSecrets.jpg", "J.K.Rowling"),
-//     new Book("Harry Potter and the Prisoner of Azakaban", "./media/HarryPotterandthePrisonerofAzakaban.jpg", "J.K.Rowling"),
-// ]
+    let Carousel = document.getElementById("CarouselBooks");
+    var i;
+    for (i=0;i<arr.length;i++){
 
-function display_books(){
-    console.log('here')
-    let search_results = JSON.parse(localStorage.getItem("search_results"))
-    console.log(search_results)
-    let table = document.getElementById('books-table')
-    let no_of_rows = Math.floor(search_results.length / 3)
-    no_of_rows += (search_results.length % 3)
-    let book_index = 0;
-    table.innerHTML = ''
-    for (let row = 0; row < no_of_rows; row++){
-        let table_row = document.createElement('tr')
-        for (let col = 0; col < 3; col++){
-            let book = search_results[book_index]
-            let cell = document.createElement('td')
-            cell.innerHTML = `
-                "<img src=\"../${book.imgSrc}\" alt=\"${book.Title}\" width="500" height="500">
-                <br>
-                <span>\"${book.Title}"</span>
-                <br>
-                <span>Author: \"${book.Author}\"</span>
-            `
-            table_row.appendChild(cell)
-            book_index++
-        }
-        table.appendChild(table_row)
+        /*  let bookDetailsAnchor = document.createElement('a');
+            bookDetailsAnchor.setAttribute("href", "Components/bookDetails.html/" + arr[i]);
+        */
+        let CarouselItem = document.createElement('div');
+        let CarouselImage = document.createElement('img');
+        let CarouselInnerBlock = document.createElement('div');
+        let BookTitle = document.createElement('h5');
+        let BookAuthor = document.createElement('p');
+        let Book = arr[i];
+
+        BookTitle.style.cssText = "-webkit-text-stroke-width: 0.25px; -webkit-text-stroke-color: black;"
+        BookAuthor.style.cssText = "-webkit-text-stroke-width: 0.25px; -webkit-text-stroke-color: black;"
+        BookTitle.innerText = Book.Title;
+        BookAuthor.innerText = "by " + Book.Author;
+        CarouselInnerBlock.append(BookTitle);
+        CarouselInnerBlock.append(BookAuthor);
+        CarouselInnerBlock.classList.add("carousel-caption","d-none","d-md-block");
+
+        CarouselImage.classList.add("d-block","w-100");
+        CarouselImage.classList.add("d-block","w-100");
+        CarouselImage.src = '../' + Book.imgSrc;
         
+        CarouselImage.alt = Book.Title;
+        CarouselItem.append(CarouselImage);
+        CarouselItem.append(CarouselInnerBlock);
+
+        if (i == 0){
+            CarouselItem.classList.add("carousel-item","active")
+        }
+        else{
+            CarouselItem.classList.add("carousel-item")
+        }
+        Carousel.append(CarouselItem);
     }
 }
 
-display_books()
+
+let search_results = JSON.parse(sessionStorage.getItem(window.location.href.split("=")[1]))
+console.log(search_results)
+if (search_results.length != 0){
+    createCarousel(search_results)
+}
+else{
+    let display_div = document.getElementById('display-div')
+    display_div.innerHTML = '<P>No Results found</p>'
+}

@@ -50,9 +50,8 @@ function getBook(arr,i) {
 
 function createCarousel(arr,k) {
     Carousel = document.getElementById("CarouselBooks"+k);
-    console.log(Carousel)
     var i;
-    for (i=0;i<getBookLength(arr);i++){
+    for (i=0;i< arr.length;i++){
 
         /*  let bookDetailsAnchor = document.createElement('a');
             bookDetailsAnchor.setAttribute("href", "Components/bookDetails.html/" + arr[i]);
@@ -67,7 +66,6 @@ function createCarousel(arr,k) {
         BookTitle.style.cssText = "-webkit-text-stroke-width: 0.25px; -webkit-text-stroke-color: black;"
         BookAuthor.style.cssText = "-webkit-text-stroke-width: 0.25px; -webkit-text-stroke-color: black;"
         BookTitle.innerText = Book.getTitle();
-        console.log(BookTitle)
         BookAuthor.innerText = "by " + Book.getAuthor();
         CarouselInnerBlock.append(BookTitle);
         CarouselInnerBlock.append(BookAuthor);
@@ -91,11 +89,12 @@ function createCarousel(arr,k) {
 }
 
     var Book1 = new Book("DEEP LEARNING","Ian Goodfellow, Yousha Bengio, and Aaron Courville", "media/Deep Learning by Ian ,Yousha,& Aaron.jpg","")
-    var Book2 = new Book("DEEP LEARNING","Douwe Osinga","media/Deep Learning Cookbook.png","")
+    var Book2 = new Book("DEEP LEARNING","Douwe Osinga","./media/Deep Learning Cookbook.png","")
     var Book3 = new Book("HARRY POTTER and the CHAMBER of SECRETS","J.K. ROWLING","media/Harry Potter and the Chamber of Secrets.jpg","")
     var Book4 = new Book("HARRY POTTER and the PHILOSPHER'S STONE","J.K. ROWLING","media/Harry Potter and the Philsopher's Stone.jpg","")
 
     var arrCommonBooks = [Book1,Book2,Book3,Book4]
+
     createCarousel(arrCommonBooks,1)
     createCarousel(arrCommonBooks,2)
     createCarousel(arrCommonBooks,3)

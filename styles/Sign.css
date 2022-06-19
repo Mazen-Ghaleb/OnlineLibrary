@@ -15,8 +15,12 @@
             outline: none;
           }
 
+          .notCorrect {
+            color:red;
+          }
+
           /* Set a style for all buttons */
-          button {
+          .buttonNorm {
             background-color: #04AA6D;
             color: white;
             padding: 14px 20px;
@@ -105,3 +109,4 @@
               width: 100%;
             }
         }
+
