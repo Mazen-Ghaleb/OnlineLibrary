@@ -25,12 +25,16 @@
         <p id="cardPublishDate" class="card-text"></p>
       </div>
 
-      <form action="../Components/ResetPassword.html" style="margin: 0px 10px 10px 10px">
-        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Reset Password</button>
+      <form id="resetPasswordForm" action="../Components/ResetPassword.html" style="margin: 0px 10px 10px 10px; display:none">
+        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" >Reset Password</button>
         <!-- <input type="submit" style="margin: 10px 10px 10px 10px" class="btn btn-outline-danger my-2 my-sm-0" value="Reset Password"> -->
       </form>
     </div>
     <script>
+      if(JSON.parse(localStorage.getItem("LoggedIn")) === "True" &&
+        UserFromJson(JSON.parse(localStorage.getItem("AccLoggedIn"))).getUserMail() === decodeURI(location.href.split("=")[1]))
+          document.getElementById("resetPasswordForm").style.setProperty("display", "block");   
+
       display_Profile_details();
     </script>
   </body>

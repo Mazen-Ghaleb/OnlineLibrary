@@ -103,6 +103,9 @@ function login(email,password) {
     found = false;
     logged = false;
 
+    document.getElementById('CheckMail').innerHTML = '';
+    document.getElementById('CheckPassword').innerHTML = '';
+
     for(var i = 0; i<arrAccounts.length; i++){
         if (email === arrAccounts[i].getUserMail()){
             if (password === arrAccounts[i].userPassword) {
