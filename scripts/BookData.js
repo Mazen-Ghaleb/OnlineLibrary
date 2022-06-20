@@ -173,25 +173,25 @@ function loadBooks(){
     if (localStorage.getItem("ALLBooks") === null)
     {
         var Book1 = new Book("DEEP LEARNING","Ian Goodfellow, Yousha Bengio, and Aaron Courville","Educational",
-        "media/Deep Learning by Ian ,Yousha,& Aaron.jpg","")
+        "media/Deep Learning by Ian ,Yousha,& Aaron.jpg","20/6/2022")
 
         var Book2 = new Book("DEEP LEARNING COOKBOOK","Douwe Osinga", "Educational",
-        "media/Deep Learning Cookbook.png","")
+        "media/Deep Learning Cookbook.png","20/6/2022")
 
         var Book3 = new Book("HARRY POTTER and the CHAMBER of SECRETS","J.K. ROWLING", "Common",
-        "media/Harry Potter and the Chamber of Secrets.jpg","")
+        "media/Harry Potter and the Chamber of Secrets.jpg","20/6/2022")
 
         var Book4 = new Book("HARRY POTTER and the PHILOSPHER'S STONE","J.K. ROWLING", "Common",
-        "media/Harry Potter and the Philsopher's Stone.jpg","")
+        "media/Harry Potter and the Philsopher's Stone.jpg","20/6/2022")
         
         var Book5 = new Book("HARRY POTTER and the PRISONER of AZAKBAN","J.K. ROWLING", "Common",
-        "media/Harry Potter and the Prisoner of Azakaban.jpg","")
+        "media/Harry Potter and the Prisoner of Azakaban.jpg","20/6/2022")
 
         var Book6 = new Book ("HOW TO RAISE AN ANTIRACIST","IBRAM X. KENDI", "New",
-        "media/HOW TO RAISE AN ANTIRACIST.jpg","")
+        "media/HOW TO RAISE AN ANTIRACIST.jpg","20/6/2022")
 
         var Book7 = new Book ("Building a Second Brain","TIAGO FORTE", "New",
-        "media/Building a Second Brain.jpg","")
+        "media/Building a Second Brain.jpg","20/6/2022")
 
         var ALLBooks = [Book1, Book2, Book3, Book4, Book5, Book6, Book7] 
         localStorage.setItem("ALLBooks", JSON.stringify(ALLBooks))
@@ -219,16 +219,28 @@ function loadBooks(){
 }
 
 function add_book(){
-    let author = document.getElementById('book-author').value
+    let AllBooks = JSON.parse(localStorage.getItem("ALLBooks"))
+
     let title = document.getElementById('book-title').value
+    for(var i = 0 ; i < AllBooks.length; i++){
+        if (title === AllBooks[i].Title){
+            document.getElementById('CheckBook').style.color = 'red';
+            document.getElementById('CheckBook').innerHTML = 'A book with this title already exists';
+            return false;
+        }
+    }
+
+    let author = document.getElementById('book-author').value
     let date = new Date()
-    date = date.toDateString();
+    date = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
     let imgSrc = document.getElementById('cover-link').value
     let category = document.getElementById('book-category').value
     let book = {Title:title, Author:author, Date:date, imgSrc:imgSrc, Category:category}
-    let AllBooks = JSON.parse(localStorage.getItem("ALLBooks"))
+
     AllBooks.push(book)
     localStorage.setItem("ALLBooks", JSON.stringify(AllBooks));
+
+    return true;
 }
 
 
@@ -267,7 +279,7 @@ function displayBookDetails(){
         JSON.parse(localStorage.getItem('AccLoggedIn')).role === "Admin"){
         let removeButton = document.createElement("button");
         removeButton.innerText = "Remove Book";
-        removeButton.setAttribute("class", "btn btn-danger");
+        removeButton.setAttribute("class", "btn btn-outline-danger");
         removeButton.setAttribute("onclick", "remove_book()");
         document.getElementsByClassName("cardBody")[0].appendChild(removeButton);
     }
@@ -281,14 +293,15 @@ function generateCardsForAllBooks(){
     //loop through all books
     for (const book of AllBooks){
         cardsDiv.innerHTML += `
-        <div class="card" style="width:16em; height: 32em; margin-top:10px;margin-bottom: 10px;">
+        <div class="card" style="width:16em; height: 35em; margin-top:10px;margin-bottom: 10px;">
         <a href="../Components/bookDetails.html?book=${book.Title}">
-        <img id="cardBookCover" class="card-img-top" alt="Card image cap" src="${(book.imgSrc.includes("media/")? ("../" + book.imgSrc) : book.imgSrc)}">
+        <img id="cardBookCover" style="width=10em;height:20em" class="card-img-top" alt="Card image cap" src="${(book.imgSrc.includes("media/")? ("../" + book.imgSrc) : book.imgSrc)}">
         </a>
         <div class="card-body">
-          <h5 id="cardBookTitle" style="width:12em; height: 4em;" class="card-title">${book.Title}</h5>
-          <h6 id="cardBookAuthor" style="width:12em; height: 4em;" class="card-subtitle mb-2 text-muted">Author: ${book.Author}</h6>
-          <p id="cardPublishDate" style="width:12em; height: 4em;" class="card-text">Publish Date: ${book.Date}</p>
+            <h5 id="cardBookTitle" style="height:4em" class="card-title">${book.Title}</h5>
+            <h6 id="cardBookAuthor" style="height:4em" class="card-subtitle mb-2 text-muted">Author: ${book.Author}</h6>
+            <p id="cardPublishDate" style="height:4em" class="card-text">Publish Date: ${book.Date}</p>
+            <br>
         </div>
       </div>
       `

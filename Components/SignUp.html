@@ -8,10 +8,11 @@
     <body style="    background: rgb(0,131,150);
     background: radial-gradient(circle, rgba(0,131,150,1) 0%, rgba(0,36,77,1) 100%);">
     <script>
-      generateNavBar();
       if (JSON.parse(localStorage.getItem("LoggedIn")) === "True") window.history.back()
+
+      generateNavBar();
     </script>
-    <form method= "redirectAction" onsubmit="return createAccount()" action="SignIn.html" style="border:1px solid #ccc">
+    <form method= "redirectAction" onsubmit="return createAccount()" action="SignIn.html">
         <div class="container">
           <h1 style="color:white;">Sign Up</h1>
           <p style="color:white;">Please fill in this form to create an account.</p>
@@ -38,8 +39,8 @@
           <p style="color:white;">By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
       
           <div class="clearfix">
-            <button type="button" class="cancelbtn buttonNorm" onclick="window.history.back()">Cancel</button>
-            <button type="submit" class="signupbtn buttonNorm">Sign Up</button>
+            <button type="button" style="padding:1em 1em 1em 1em" class="cancelbtn buttonNorm" onclick="window.history.back()">Cancel</button>
+            <button type="submit" style="padding:1em 1em 1em 1em" class="signupbtn buttonNorm">Sign Up</button>
           </div>
         </div>
       </form>

@@ -46,40 +46,32 @@ function generateNav() {
     "bg-dark",
     "justify-content-between"
   );
-  nav.innerHTML = `
-  <button class="btn btn-outline-success my-2 my-sm-0" style="border:none; color:lightblue;" id="browseAllBooksBtn">
-    <a class="navbar-brand" href="${pathRoot}/index.html">The Online Library</a>
-  </button>
-
+  nav.innerHTML = `<a class="navbar-brand" href="${pathRoot}/index.html">
+  <button class="btn btn-outline-primary my-2 my-sm-0" style="border:none; color:lightblue;" id="browseAllBooksBtn">The Online Library</button></a>
 
     <div style="display:inline; id=profile-container">
-        <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllBooksBtn" style="border:none; color:lightblue;">
-          <a style="color:lightblue;" href="${pathRoot}/Components/browseAllBooks.html">Books</a>
-        </button>
+        <a style="color:lightblue;" href="${pathRoot}/Components/browseAllBooks.html">
+        <button class="btn btn-outline-secondary my-2 my-sm-0" id="browseAllBooksBtn" style="border:none; color:lightblue;">Books</button></a>
 
         ${((JSON.parse(localStorage.getItem("LoggedIn")) === "True" && JSON.parse(localStorage.getItem("AccLoggedIn")).role === "Admin")?
-         `<button class="btn btn-outline-success my-2 my-sm-0" id="browseAllMembersBtn" style="border:none; color:lightblue;">
-        <a style="color:lightblue;" href="${pathRoot}/Components/browseAllMembers.html">Members</a>
-      </button>
-      <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllMembersBtn" style="border:none; color:lightblue;">
-        <a style="color:lightblue;" href="${pathRoot}/Components/bookAddition.html">Add Book</a>
-      </button>
+         `<a style="color:lightblue;" href="${pathRoot}/Components/browseAllMembers.html">
+         <button class="btn btn-outline-secondary my-2 my-sm-0" id="browseAllMembersBtn" style="border:none; color:lightblue;">Members</button></a>
+         <a style="color:lightblue;" href="${pathRoot}/Components/bookAddition.html">
+          <button class="btn btn-outline-secondary my-2 my-sm-0" id="browseAllMembersBtn" style="border:none; color:lightblue;">Add Book</button></a>
     ` : ``)}
     </div>
     <div style="display:inline;width:45%;" id="searchContainer">
       <form style="display:inline;"class="form-inline" onsubmit="return search_books()">
         <input style="width:60%;" class="form-control mr-sm-2" type="search" placeholder="Search for book by Title or Author" aria-label="Search" id="search-box" />
-        <button class="btn btn-outline-success my-2 my-sm-0" style="border:none; color:lightyellow;background-color: gray;" type="submit">Search</button>
+        <button class="btn btn-secondary my-2 my-sm-0" style="border:none; color:lightyellow;" type="submit">Search</button>
       </form>
     </div>
       <div style="display:inline;" id="profile-container">
-        <button class="btn btn-outline-success my-2 my-sm-0" id="signIn" style="margin:5px; border:none;">
-         <a style="text-decoration:underline;color:lightblue;" href="${pathRoot}/Components/SignIn.html">Sign In</a>
+      <a style="color:lightblue;" id="signIn" href="${pathRoot}/Components/SignIn.html">
+        <button class="btn btn-outline-success my-2 my-sm-0" style="text-decoration:underline;margin:5px; border:none; color:lightblue;">Sign In</button></a>
 
-        </button>
-        <button class="btn btn-outline-success my-2 my-sm-0 " id="signUp" style="border:none; color:lightblue;">
-          <a style="text-decoration:underline;color:lightblue;" href="${pathRoot}/Components/SignUp.html">Sign Up</a>
-        </button>
+        <a style="color:lightblue;" id="signUp" href="${pathRoot}/Components/SignUp.html">
+        <button class="btn btn-outline-success my-2 my-sm-0" style="text-decoration:underline;border:none; color:lightblue;">Sign Up</button></a>
       </div>
   `;
   return nav;
@@ -98,9 +90,8 @@ function display_account_data(goBack) {
   let container = document.createElement("div");
   container.id = "profile-container";
   container.innerHTML = `
-  <img src='${pathRoot}/media/profile.png' style='cursor:pointer;height:50px;width:50px; padding:10px;'
-       onclick="window.open('${pathRoot}/Components/Profile.html?accountEmail=${account.userMail}')">
-  <button style="text-decoration:underline; border:none; color:lightblue;"class="btn btn-outline-success my-2 my-sm-0" id="signOut" onclick="sign_out(${goBack})">Sign Out</button>
+  <button style="height:50px;width:50px;padding:10px; text-decoration:underline; border:none; color:lightblue;"class="btn btn-outline-secondary my-2 my-sm-0" id="signOut" onclick="window.open('${pathRoot}/Components/Profile.html?accountEmail=${account.userMail}')")"><img src='${pathRoot}/media/profile.png' style='cursor:pointer;width:100%;height:100%'></button>
+  <button style="text-decoration:underline; border:none; color:lightblue;"class="btn btn-outline-danger my-2 my-sm-0" id="signOut" onclick="sign_out(${goBack})">Sign Out</button>
   `;
 
   container.style.display = "inline"; 
@@ -125,6 +116,9 @@ function goToPage (path){
 
 function search_books() {
   let search_term = document.getElementById('search-box').value.toLowerCase()
+  if (search_term == ""){
+    return false;
+  }
   let search_results = []
   let AllBooks = JSON.parse(localStorage.getItem("ALLBooks"));
   for (let i = 0; i < AllBooks.length; i++) {

@@ -6,16 +6,16 @@
 
   <body>
     <script>
+      if (
+        JSON.parse(localStorage.getItem('LoggedIn')) !== 'True' ||
+        UserFromJson(JSON.parse(localStorage.getItem('AccLoggedIn'))).getRole() !== 'Admin'
+      )
+        window.history.back();
+
       generateNavBar();
       display_account_data(() => {
         window.history.back();
       });
-
-      if (
-        JSON.parse(localStorage.getItem('LoggedIn')) !== 'True' ||
-        UserFromJson(JSON.parse(localStorage.getItem('AccLoggedIn')).getRole() !== 'Admin')
-      )
-        window.history.back();
     </script>
     <div id="cardsDiv"></div>
     <script>

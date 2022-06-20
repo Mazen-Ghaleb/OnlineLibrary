@@ -6,11 +6,12 @@
     </head>
     <body style="background: rgb(0,131,150);background: radial-gradient(circle, rgba(0,131,150,1) 0%, rgba(0,36,77,1) 100%);">
       <script>
-        generateNavBar();
         if (JSON.parse(localStorage.getItem("LoggedIn")) === "True") window.history.back()
+
+        generateNavBar();
       </script>
       <script type= "text/javascript" src="../scripts/AccountData.js"></script>
-    <form onsubmit="return login(this.email.value,this.psw.value)" action="../index.html" style="border:1px solid #ccc">
+    <form onsubmit="return login(this.email.value,this.psw.value)" action="../index.html">
         <div class="container">
           <h1 style="color:white;">Sign In</h1>
           <p style="color:white;">Enter your account details</p>

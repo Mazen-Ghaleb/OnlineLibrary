@@ -7,11 +7,8 @@
   </head>
   <body>
     <script>
-      if (JSON.parse(localStorage.getItem('LoggedIn')) !== 'True') window.close();
       generateNavBar();
-      display_account_data(() => {
-        window.close();
-      }); // FIXME return to index if not logged in
+      display_account_data();
     </script>
 
     <br />
