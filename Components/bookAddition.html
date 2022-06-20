@@ -1,7 +1,9 @@
 <html>
   <head>
+    <title>Add Book</title>
     <script src="../scripts/index.js"></script>
     <script src="../scripts/AccountData.js"></script>
+    <link rel="stylesheet" type="text/css" href="../styles/Sign.css" />
     <link href="../styles/forms.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
@@ -19,28 +21,33 @@
     </script>
     <div class="form-container">
       <form onsubmit="return add_book();">
+        <br />
+        <h1 style="color: white">Add Book</h1>
+        <p style="color: white">Insert a new book into the database.</p>
+        <hr style="background-color: white" />
+
+        <!-- <div class="form-group"> -->
+        <label style="color: white" for="book-title"><b>Title</b></label>
+        <input type="text" class="form-control" id="book-title" placeholder="Title" required />
+        <span id="CheckBook"></span>
+        <!-- </div>
+        <div class="form-group"> -->
+        <label style="color: white" for="book-author"><b>Author</b></label>
+        <input type="text" class="form-control" id="book-author" placeholder="Author" required />
+        <!-- </div> -->
         <div class="form-group">
-          <label for="book-title">Title</label>
-          <input type="text" class="form-control" id="book-title" placeholder="Title" required />
-          <span id="CheckBook"></span>
+          <label style="color: white" for="cover-link" Image><b>Cover Link</b></label>
+          <input type="url" class="form-control" id="cover-link" style="margin-bottom: 0.3em" placeholder="www.example.com/image" required />
         </div>
         <div class="form-group">
-          <label for="book-author">Author</label>
-          <input type="text" class="form-control" id="book-author" placeholder="Author" required />
-        </div>
-        <div class="form-group">
-          <label for="cover-link" Image>cover link</label>
-          <input type="url" class="form-control" id="cover-link" placeholder="www.example.com/image" required />
-        </div>
-        <div class="form-group">
-          <label for="book-category">Example select</label>
-          <select class="form-control" id="book-category" required>
+          <label style="color: white" for="book-category"><b>Category</b></label>
+          <select class="form-control" id="book-category" style="height: 3.3em" required>
             <option>New</option>
             <option>Educational</option>
             <option>Common</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn buttonNorm">Submit</button>
       </form>
     </div>
     <script src="../scripts/BookData.js"></script>
