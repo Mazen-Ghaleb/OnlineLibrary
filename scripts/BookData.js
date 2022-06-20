@@ -198,7 +198,7 @@ function displayBookDetails(){
         }
     } 
     if (selectedBook == null) {alert("NO BOOK CHOSEN"); return;}
-    document.getElementById("cardBookCover").setAttribute("src",  (selectedBook.imgSrc.includes("media/")?
+    document.getElementById("cardBookCover").setAttribute("src",  (selectedBook.imgSrc.startsWith("media/")?
      ("../" + selectedBook.imgSrc) : selectedBook.imgSrc))
     document.getElementById("cardBookTitle").innerText = " " + selectedBook.Title;
     document.getElementById("cardBookAuthor").innerText = "Author: " + selectedBook.Author;
@@ -225,7 +225,7 @@ function generateCardsForAllBooks(){
         cardsDiv.innerHTML += `
         <div class="card" style="width:16em; height: 35em; margin-top:10px;margin-bottom: 10px;">
         <a href="../Components/bookDetails.html?book=${book.Title}">
-        <img id="cardBookCover" style="width=10em;height:20em" class="card-img-top" alt="Card image cap" src="${(book.imgSrc.includes("media/")? ("../" + book.imgSrc) : book.imgSrc)}">
+        <img id="cardBookCover" style="width=10em;height:20em" class="card-img-top" alt="Card image cap" src="${(book.imgSrc.startsWith("media/")? ("../" + book.imgSrc) : book.imgSrc)}">
         </a>
         <div class="card-body">
             <h5 id="cardBookTitle" style="height:4em" class="card-title">${book.Title}</h5>
@@ -277,7 +277,7 @@ function createCarouselOfSearch(arr) {
 
         CarouselImage.classList.add("d-block","w-100");
         CarouselImage.classList.add("d-block","w-100");
-        CarouselImage.src = (Book.imgSrc.includes("media/")? ("../" + Book.imgSrc) : Book.imgSrc);
+        CarouselImage.src = (Book.imgSrc.startsWith("media/")? ("../" + Book.imgSrc) : Book.imgSrc);
         
         CarouselImage.alt = Book.Title;
         // CarouselItem.append(CarouselImage);
@@ -302,6 +302,6 @@ function browseSearchResults(){
     else{
         let display_div = document.getElementById('display-div');
         display_div.style.height = "100%";
-        display_div.innerHTML = '<h1 style="vertical-align:middle;text-align:center; color:white; margin-top:20%;">No Results found</h1>';
+        display_div.innerHTML = '<h1 style="vertical-align:middle;text-align:center; color:white; margin-top:20%;">No Results Found</h1>';
     }
 }
