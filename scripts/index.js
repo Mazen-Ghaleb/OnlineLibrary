@@ -1,5 +1,5 @@
 let pathRoot = "..";
-if (window.location.pathname.split("/").pop() === "index.html") pathRoot = ".";
+if (window.location.pathname.includes("index.html")) pathRoot = ".";
 
 function generateNavBar() {
   let head = document.getElementsByTagName("head")[0];
@@ -47,7 +47,7 @@ function generateNav() {
     "justify-content-between"
   );
   nav.innerHTML = `
-  <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllBooksBtn">
+  <button class="btn btn-outline-success my-2 my-sm-0" style="border:none;" id="browseAllBooksBtn">
     <a class="navbar-brand" href="${pathRoot}/index.html">The Online Library</a>
   </button>
 
@@ -67,14 +67,13 @@ function generateNav() {
     ` : ``)}
     </div>
     
-        
-
     <form class="form-inline" onsubmit="return search_books()">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-box" />
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       <div style="display:inline; id=profile-container">
-        <button class="btn btn-outline-success my-2 my-sm-0" id="signIn">
-          <a href="${pathRoot}/Components/SignIn.html">Sign In</a>
+        <button class="btn btn-outline-success my-2 my-sm-0" id="signIn" style="margin:5px;">
+         <a href="${pathRoot}/Components/SignIn.html">Sign In</a>
+
         </button>
         <button class="btn btn-outline-success my-2 my-sm-0" id="signUp">
           <a href="${pathRoot}/Components/SignUp.html">Sign Up</a>
@@ -93,7 +92,6 @@ function display_account_data(goBack) {
   let sign_in_button = document.getElementById("signIn");
   let sign_up_button = document.getElementById("signUp");
   let parent_node = sign_in_button.parentElement;
-  console.log(parent_node);
   parent_node.removeChild(sign_in_button);
   parent_node.removeChild(sign_up_button);
   let container = document.createElement("div");

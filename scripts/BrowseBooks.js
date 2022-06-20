@@ -56,7 +56,6 @@ function createCarousel(arr) {
 
 function browseSearchResults(){
     let search_results = JSON.parse(sessionStorage.getItem(window.location.href.split("=")[1]));
-    console.log(search_results);
     if (search_results.length != 0){
         createCarousel(search_results);
     }

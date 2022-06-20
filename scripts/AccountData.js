@@ -44,10 +44,8 @@ if (localStorage.getItem("accounts") === null)
 
 
 var arrAccounts = JSON.parse(localStorage.getItem("accounts"));
-console.log(arrAccounts)
 for (let i = 0; i < arrAccounts.length; i++)
     arrAccounts[i] = UserFromJson(arrAccounts[i]);
-console.log(arrAccounts)
 
 if (localStorage.getItem("LoggedIn") === null)
     localStorage.setItem("LoggedIn", JSON.stringify("False"));
@@ -213,5 +211,4 @@ function display_Profile_details(){
     document.getElementById("cardPublishDate").innerText = `since: ${selectedAccount.createDate}`;
     document.getElementById("cardRole").innerText = `Role: ${selectedAccount.role}`;
 
-    console.log(selectedBook);
 }

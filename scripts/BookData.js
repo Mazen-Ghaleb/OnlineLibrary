@@ -160,7 +160,6 @@ function createCarousel(arr,k) {
 
 // function browseSearchResults(){
 //     let search_results = JSON.parse(sessionStorage.getItem(window.location.href.split("=")[1]));
-//     console.log(search_results);
 //     if (search_results.length != 0){
 //         createCarousel2(search_results);
 //     }
@@ -195,7 +194,7 @@ function loadBooks(){
         "media/Building a Second Brain.jpg","")
 
         var ALLBooks = [Book1, Book2, Book3, Book4, Book5, Book6, Book7] 
-        JSON.setItem(localStorage.setItem("ALLBooks", JSON.stringify(ALLBooks)))
+        localStorage.setItem("ALLBooks", JSON.stringify(ALLBooks))
     }else{
         var ALLBooks = JSON.parse(localStorage.getItem("ALLBooks"))
     }
@@ -239,7 +238,6 @@ function remove_book(){
     for (let i = 0; i < AllBooks.length; i++){
         if (AllBooks[i].Title === bookTitle){
             AllBooks.splice(i, 1);
-            console.log(AllBooks)
             localStorage.setItem("ALLBooks", JSON.stringify(AllBooks));
             break;
         }
