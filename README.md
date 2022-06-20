@@ -2,7 +2,7 @@
 
 The website can be accessed [here!](https://mazen-ghaleb.github.io/OnlineLibrary/index.html "Project's Git Page Link")
 
-![Project image](media\ProjectImage.png)
+![Project image](media/ProjectImage.png)
 
 ## Description
 
