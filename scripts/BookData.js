@@ -175,7 +175,7 @@ function loadBooks(){
         var Book1 = new Book("DEEP LEARNING","Ian Goodfellow, Yousha Bengio, and Aaron Courville","Educational",
         "media/Deep Learning by Ian ,Yousha,& Aaron.jpg","")
 
-        var Book2 = new Book("DEEP LEARNING","Douwe Osinga", "Educational",
+        var Book2 = new Book("DEEP LEARNING COOKBOOK","Douwe Osinga", "Educational",
         "media/Deep Learning Cookbook.png","")
 
         var Book3 = new Book("HARRY POTTER and the CHAMBER of SECRETS","J.K. ROWLING", "Common",
@@ -282,12 +282,13 @@ function generateCardsForAllBooks(){
     for (const book of AllBooks){
         cardsDiv.innerHTML += `
         <div class="card" style="width:16em; height: 32em; margin-top:10px;margin-bottom: 10px;">
+        <a href="../Components/bookDetails.html?book=${book.Title}">
         <img id="cardBookCover" class="card-img-top" alt="Card image cap" src="${(book.imgSrc.includes("media/")? ("../" + book.imgSrc) : book.imgSrc)}">
+        </a>
         <div class="card-body">
           <h5 id="cardBookTitle" style="width:12em; height: 4em;" class="card-title">${book.Title}</h5>
           <h6 id="cardBookAuthor" style="width:12em; height: 4em;" class="card-subtitle mb-2 text-muted">Author: ${book.Author}</h6>
           <p id="cardPublishDate" style="width:12em; height: 4em;" class="card-text">Publish Date: ${book.Date}</p>
-          <a href="../Components/bookDetails.html?book=${book.Title}" class="card-link">Book link</a>
         </div>
       </div>
       `

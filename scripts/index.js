@@ -1,5 +1,5 @@
 let pathRoot = "..";
-if (window.location.pathname.includes("index.html")) pathRoot = ".";
+if (window.location.pathname.includes("index.html") || window.location.pathname==="/") pathRoot = ".";
 
 function generateNavBar() {
   let head = document.getElementsByTagName("head")[0];
@@ -47,39 +47,40 @@ function generateNav() {
     "justify-content-between"
   );
   nav.innerHTML = `
-  <button class="btn btn-outline-success my-2 my-sm-0" style="border:none;" id="browseAllBooksBtn">
+  <button class="btn btn-outline-success my-2 my-sm-0" style="border:none; color:lightblue;" id="browseAllBooksBtn">
     <a class="navbar-brand" href="${pathRoot}/index.html">The Online Library</a>
   </button>
 
 
     <div style="display:inline; id=profile-container">
-        <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllBooksBtn">
-          <a href="${pathRoot}/Components/browseAllBooks.html">Books</a>
+        <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllBooksBtn" style="border:none; color:lightblue;">
+          <a style="color:lightblue;" href="${pathRoot}/Components/browseAllBooks.html">Books</a>
         </button>
 
         ${((JSON.parse(localStorage.getItem("LoggedIn")) === "True" && JSON.parse(localStorage.getItem("AccLoggedIn")).role === "Admin")?
-         `<button class="btn btn-outline-success my-2 my-sm-0" id="browseAllMembersBtn">
-        <a href="${pathRoot}/Components/browseAllMembers.html">Members</a>
+         `<button class="btn btn-outline-success my-2 my-sm-0" id="browseAllMembersBtn" style="border:none; color:lightblue;">
+        <a style="color:lightblue;" href="${pathRoot}/Components/browseAllMembers.html">Members</a>
       </button>
-      <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllMembersBtn">
-        <a href="${pathRoot}/Components/bookAddition.html">Add Book</a>
+      <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllMembersBtn" style="border:none; color:lightblue;">
+        <a style="color:lightblue;" href="${pathRoot}/Components/bookAddition.html">Add Book</a>
       </button>
     ` : ``)}
     </div>
-    
-    <form class="form-inline" onsubmit="return search_books()">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-box" />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      <div style="display:inline; id=profile-container">
-        <button class="btn btn-outline-success my-2 my-sm-0" id="signIn" style="margin:5px;">
-         <a href="${pathRoot}/Components/SignIn.html">Sign In</a>
+    <div style="display:inline;width:45%;" id="searchContainer">
+      <form style="display:inline;"class="form-inline" onsubmit="return search_books()">
+        <input style="width:60%;" class="form-control mr-sm-2" type="search" placeholder="Search for book by Title or Author" aria-label="Search" id="search-box" />
+        <button class="btn btn-outline-success my-2 my-sm-0" style="border:none; color:lightyellow;background-color: gray;" type="submit">Search</button>
+      </form>
+    </div>
+      <div style="display:inline;" id="profile-container">
+        <button class="btn btn-outline-success my-2 my-sm-0" id="signIn" style="margin:5px; border:none;">
+         <a style="text-decoration:underline;color:lightblue;" href="${pathRoot}/Components/SignIn.html">Sign In</a>
 
         </button>
-        <button class="btn btn-outline-success my-2 my-sm-0" id="signUp">
-          <a href="${pathRoot}/Components/SignUp.html">Sign Up</a>
+        <button class="btn btn-outline-success my-2 my-sm-0 " id="signUp" style="border:none; color:lightblue;">
+          <a style="text-decoration:underline;color:lightblue;" href="${pathRoot}/Components/SignUp.html">Sign Up</a>
         </button>
       </div>
-    </form>
   `;
   return nav;
 }
@@ -97,9 +98,9 @@ function display_account_data(goBack) {
   let container = document.createElement("div");
   container.id = "profile-container";
   container.innerHTML = `
-  <img src='../media/profile.png' style='height:50px;width:50px; padding:10px;'
+  <img src='${pathRoot}/media/profile.png' style='cursor:pointer;height:50px;width:50px; padding:10px;'
        onclick="window.open('${pathRoot}/Components/Profile.html?accountEmail=${account.userMail}')">
-  <button class="btn btn-outline-success my-2 my-sm-0" id="signOut" onclick="sign_out(${goBack})">Sign Out</button>
+  <button style="text-decoration:underline; border:none; color:lightblue;"class="btn btn-outline-success my-2 my-sm-0" id="signOut" onclick="sign_out(${goBack})">Sign Out</button>
   `;
 
   container.style.display = "inline"; 

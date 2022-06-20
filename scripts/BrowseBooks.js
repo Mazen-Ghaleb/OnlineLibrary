@@ -61,6 +61,7 @@ function browseSearchResults(){
     }
     else{
         let display_div = document.getElementById('display-div');
-        display_div.innerHTML = '<p>No Results found</p>';
+        display_div.style.height = "100%";
+        display_div.innerHTML = '<h1 style="vertical-align:middle;text-align:center; color:white; margin-top:20%;">No Results found</h1>';
     }
 }
