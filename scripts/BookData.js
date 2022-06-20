@@ -102,28 +102,34 @@ function createCarousel(arr,k) {
 function loadBooks(){
     if (localStorage.getItem("ALLBooks") === null)
     {
-        var Book1 = new Book("DEEP LEARNING","Ian Goodfellow, Yousha Bengio, and Aaron Courville","Educational",
-        "media/Deep Learning by Ian ,Yousha,& Aaron.jpg","20/6/2022")
+        var ALLBooks = [
+            new Book("The Lord Of The Rings, The Fellowship of The Ring","J.R.R. Tolkein","Common","media/LORD OF THE RINGS - PART 1.png","29/07/1954"),
+            new Book("The Lord Of The Rings, The Two Towers","J.R.R. Tolkein","Common","media/LORD OF THE RINGS - PART 2.png","11/11/1954"),
+            new Book("The Lord Of The Rings, The Return of The King","J.R.R. Tolkein","Common","media/LORD OF THE RINGS - PART 3.jpg","20/10/1955"),
+            new Book("HARRY POTTER and the PHILOSPHER'S STONE","J.K. ROWLING", "Common","media/Harry Potter and the Philsopher's Stone.jpg","26/06/1997"),
+            new Book("HARRY POTTER and the CHAMBER of SECRETS","J.K. ROWLING", "Common", "media/Harry Potter and the Chamber of Secrets.jpg","02/07/1998"),
+            new Book("HARRY POTTER and the PRISONER of AZAKBAN","J.K. ROWLING", "Common","media/Harry Potter and the Prisoner of Azakaban.jpg","08/07/1999"),
+            new Book("University Physics Volume 3","Samuel J. Ling","Educational","media/University Physics Vol3.png","29/09/2016"),
+            new Book("Python Object-Oriented Programming: Build robust and maintainable object-oriented Python applications and libraries, 4th Edition","Dusty PhillipsI","Educational","media/Python OOP.png","29/06/2021"),
+            new Book("MANGA IN THEORY AND PRACTICE THE CRAFT OF CREATING MANGA","HIROHIKO ARAKI","Common","media/MANGA IN THEORY AND PRACTICE.png","13/06/2017"),
+            new Book("DEEP LEARNING","Ian Goodfellow, Yousha Bengio, and Aaron Courville","Educational","media/Deep Learning by Ian ,Yousha,& Aaron.jpg","18/07/2017"),
+            new Book("DEEP LEARNING with Python","Francois Chollet", "Educational", "media/DEEP LEARNING with Python.jpg","01/11/2017"), 
+            new Book("The Power of One More: The Ultimate Guide to Happiness and Success", "Ed Mylett", "Common","media/The Power of One more.jpg","01/11/2017"),
+            new Book("JavaScript: The Definitive Guide: Master the World's Most-Used Programming Language", "David Flanagan", "Educational", "media/JavaScript - The Definitive Guide.png","01/11/2017"),  
+            new Book("Educated", "Tara Westover", "Educational", "media/Educated.jpg","18/02/2018"),
+            new Book("Restart", "Gordon Korman", "Common", "media/Restart.jpg","27/03/2018"),
+            new Book("React Cookbook: Recipes for Mastering the React Framework 1st Edition","Dawn Griffiths","Educational","media/JavaScript - The Definitive Guide.png","01/05/2018"),
+            new Book("Angular Development with TypeScript 2nd Edition"," Yakov Fain","Educational","media/Angular Development with TypeScript.png","01/12/2018"),
+            new Book("Essential Cell Biology / Edition 5","by Bruce Alberts, Karen Hopkin, Alexander Johnson, David Morgan, Martin Raff","Educational","media/ESSENTIAL CELL BIOLOGY.png","07/01/2019"),
+            new Book("Zachary Ying and the Dragon Emperor", "Xiran Jay Zhao", "New", "media/Zachary Ying and the Dragon Emperor.png","10/05/2022"),
+            new Book("DEEP LEARNING COOKBOOK","Douwe Osinga", "Educational", "media/Deep Learning Cookbook.png","01/06/2018"),
+            new Book("Vue.js 3 Cookbook: Discover actionable solutions for building modern web apps with the latest Vue features and TypeScript","Heitor Ramon Ribeiro","Educational","media/Vue js3 Cookbook.png","18/09/2020"),
+            new Book("The Escape Artist","Jonathan Freedland", "New", "media/The Escape Artist.jpg","09/06/2022"),            
+            new Book("HOW TO RAISE AN ANTIRACIST","IBRAM X. KENDI", "New", "media/HOW TO RAISE AN ANTIRACIST.jpg","14/06/2022"),
+            new Book("Building a Second Brain","TIAGO FORTE", "New", "media/Building a Second Brain.jpg","14/06/2022"),
+            new Book("Battle for the American Mind: Uprooting a Century of Miseducation", "David Goodwin", "New", "media/Battle for the American Mind.png","14/05/2022"), 
+        ]
 
-        var Book2 = new Book("DEEP LEARNING COOKBOOK","Douwe Osinga", "Educational",
-        "media/Deep Learning Cookbook.png","20/6/2022")
-
-        var Book3 = new Book("HARRY POTTER and the CHAMBER of SECRETS","J.K. ROWLING", "Common",
-        "media/Harry Potter and the Chamber of Secrets.jpg","20/6/2022")
-
-        var Book4 = new Book("HARRY POTTER and the PHILOSPHER'S STONE","J.K. ROWLING", "Common",
-        "media/Harry Potter and the Philsopher's Stone.jpg","20/6/2022")
-        
-        var Book5 = new Book("HARRY POTTER and the PRISONER of AZAKBAN","J.K. ROWLING", "Common",
-        "media/Harry Potter and the Prisoner of Azakaban.jpg","20/6/2022")
-
-        var Book6 = new Book ("HOW TO RAISE AN ANTIRACIST","IBRAM X. KENDI", "New",
-        "media/HOW TO RAISE AN ANTIRACIST.jpg","20/6/2022")
-
-        var Book7 = new Book ("Building a Second Brain","TIAGO FORTE", "New",
-        "media/Building a Second Brain.jpg","20/6/2022")
-
-        var ALLBooks = [Book1, Book2, Book3, Book4, Book5, Book6, Book7] 
         localStorage.setItem("ALLBooks", JSON.stringify(ALLBooks))
     }else{
         var ALLBooks = JSON.parse(localStorage.getItem("ALLBooks"))
@@ -215,6 +221,7 @@ function displayBookDetails(){
     }
 }
 
+
 function generateCardsForAllBooks(){
     //get div with id cardsDiv
     let cardsDiv = document.getElementById("cardsDiv");
@@ -228,13 +235,18 @@ function generateCardsForAllBooks(){
         <img id="cardBookCover" style="width=10em;height:20em" class="card-img-top" alt="Card image cap" src="${(book.imgSrc.startsWith("media/")? ("../" + book.imgSrc) : book.imgSrc)}">
         </a>
         <div class="card-body">
-            <h5 id="cardBookTitle" style="height:4em" class="card-title">${book.Title}</h5>
-            <h6 id="cardBookAuthor" style="height:4em" class="card-subtitle mb-2 text-muted">Author: ${book.Author}</h6>
+            <div style="height:6em;">
+                <h5 id="cardBookTitle" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical;" class="card-title">${book.Title}</h5>
+            </div>
+            <div style="height:5em;">
+                <h6 id="cardBookAuthor" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical;" class="card-subtitle mb-2 text-muted">Author: ${book.Author}</h6>
+            </div>
             <p id="cardPublishDate" style="height:4em" class="card-text">Publish Date: ${book.Date}</p>
             <br>
         </div>
       </div>
       `
+      
     }
 }
 

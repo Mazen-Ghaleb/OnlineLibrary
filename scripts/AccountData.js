@@ -33,11 +33,21 @@ function UserFromJson(json)
 
 if (localStorage.getItem("accounts") === null)
 {
-    var adminAccount = new User("Admin","admin@admin.com","admin","Forever","Admin");
-    var Account1 = new User("Youssef","ymaher@912.com","YMAHER99_DOTa2@su","19-06-2022");
-    var Account2 = new User("Mazen","mazen@mazen.com","Mazeeeeeen","19-06-2022");
-    var Account3 = new User("Lotfy","lotfy@lotfy.com","LOTFYYYYY","19-06-2022");
-    var arrAccounts = [adminAccount,Account1,Account2,Account3]
+    var arrAccounts = [
+        new User("Admin","admin@admin.com","admin","1/06/2020","Admin"),
+        new User("Book Keeper","bookkeeper@library.com","bookkeeper","19/06/2020","Admin"),
+
+        new User("Youssef Maher","ymaher@912.com","YMAHER99_DOTa2@su","28-04-2021"),
+        new User("Mazen Motafa","mazen@mazen.com","Mazeeeeeen","19/06/2022"),
+        new User("Mostafa Lotfy","lotfy@lotfy.com","LOTFYYYYY","9/09/2021"),
+
+        new User("Mohamed Mokhtar","mokh@gmail.com","m0khtar222","2/11/2020"),
+        new User("Omar Lotfy","omar@yahoo.com","olt0fy","23/01/2021"),
+        new User("Unknown","unknown@hotmail.com","IamHIDD3N","7/12/2021"),
+        
+        new User("John Doe","jdoe@gmail.com","doeD0Edoe","22/02/2022"),
+        new User("Ahmed Hazem","ahmed12@gmail.com","aHaz3m223","19/06/2022"),
+    ]
 
     localStorage.setItem("accounts", JSON.stringify(arrAccounts))
 }
@@ -86,9 +96,6 @@ function createAccount() {
             accountCreated = false;
         }
     }
-    if(accountCreated){
-        
-        }
     return accountCreated;
 }
 
@@ -118,16 +125,6 @@ function login(email,password) {
         document.getElementById('CheckPassword').classList.remove("notCorrect");
         document.getElementById('CheckMail').innerHTML = 'Email is not matching';
     }
-
-    if(logged){
-        //window.history.pushState("", "", '../index.html');
-        //goToPage("")
-        // alink = document.createElement("a");
-        // alink.href="../index.html";
-        // alink.click();
-        //window.location.assign("../index.html");
-    }
-
     return logged;
 }
 
