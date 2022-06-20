@@ -17,9 +17,6 @@ function createCarousel(arr) {
     var i;
     for (i=0;i<arr.length;i++){
 
-        /*  let bookDetailsAnchor = document.createElement('a');
-            bookDetailsAnchor.setAttribute("href", "Components/bookDetails.html/" + arr[i]);
-        */
         let bookDetailsAnchor = document.createElement('a');
         bookDetailsAnchor.setAttribute("href", "bookDetails.html?book=" + arr[i].Title);
         let CarouselItem = document.createElement('div');
@@ -57,13 +54,14 @@ function createCarousel(arr) {
     }
 }
 
-
-let search_results = JSON.parse(sessionStorage.getItem(window.location.href.split("=")[1]))
-console.log(search_results)
-if (search_results.length != 0){
-    createCarousel(search_results)
-}
-else{
-    let display_div = document.getElementById('display-div')
-    display_div.innerHTML = '<p>No Results found</p>'
+function browseSearchResults(){
+    let search_results = JSON.parse(sessionStorage.getItem(window.location.href.split("=")[1]));
+    console.log(search_results);
+    if (search_results.length != 0){
+        createCarousel(search_results);
+    }
+    else{
+        let display_div = document.getElementById('display-div');
+        display_div.innerHTML = '<p>No Results found</p>';
+    }
 }

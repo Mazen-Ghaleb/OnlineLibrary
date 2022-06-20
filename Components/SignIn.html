@@ -10,7 +10,7 @@
         if (JSON.parse(localStorage.getItem("LoggedIn")) === "True") window.history.back()
       </script>
       <script type= "text/javascript" src="../scripts/AccountData.js"></script>
-    <form onsubmit="return login(this.email.value,this.psw.value)" style="border:1px solid #ccc">
+    <form onsubmit="return login(this.email.value,this.psw.value)" action="../index.html" style="border:1px solid #ccc">
         <div class="container">
           <h1 style="color:white;">Sign In</h1>
           <p style="color:white;">Enter your account details</p>

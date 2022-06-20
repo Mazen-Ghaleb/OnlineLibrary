@@ -8,7 +8,6 @@ function generateNavBar() {
 
   alink.href = pathRoot + "/styles/indexStyles.css";
   alink.type = "text/css";
-  //<link rel="stylesheet" type="text/css" href="./styles/indexStyles.css" />
 
   head.appendChild(alink);
 
@@ -47,7 +46,6 @@ function generateNav() {
     "bg-dark",
     "justify-content-between"
   );
-  //if (JSON.parse(localStorage.getItem("LoggedIn")) === "True"){
   nav.innerHTML = `
   <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllBooksBtn">
     <a class="navbar-brand" href="${pathRoot}/index.html">The Online Library</a>
@@ -84,32 +82,6 @@ function generateNav() {
       </div>
     </form>
   `;
- // }
-  //else {nav.innerHTML = `
-  // <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllBooksBtn">
-  //   <a class="navbar-brand" href="${pathRoot}/index.html">The Online Library</a>
-  // </button>
-    
-
-  //   <div style="display:inline; id=profile-container">
-  //       <button class="btn btn-outline-success my-2 my-sm-0" id="browseAllBooksBtn">
-  //         <a href="${pathRoot}/Components/browseAllBooks.html">Books</a>
-  //       </button>
-  //     </div>
-
-  //   <form class="form-inline" onsubmit="return search_books()">
-  //     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-box" />
-  //     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  //     <div style="display:inline; id=profile-container">
-  //       <button class="btn btn-outline-success my-2 my-sm-0" id="signIn">
-  //         <a href="${pathRoot}/Components/SignIn.html">Sign In</a>
-  //       </button>
-  //       <button class="btn btn-outline-success my-2 my-sm-0" id="signUp">
-  //         <a href="${pathRoot}/Components/SignUp.html">Sign Up</a>
-  //       </button>
-  //     </div>
-  //   </form>
-  // `;}
   return nav;
 }
 
@@ -141,36 +113,29 @@ function sign_out(goBack) {
   localStorage.setItem("LoggedIn", JSON.stringify("False"));
   localStorage.setItem("AccLoggedIn", JSON.stringify(""));
   document.getElementsByTagName("nav")[0].remove();
-
-  // let nav = document.createElement("nav");
-  // nav.classList.add(
-  //   "navbar",
-  //   "navbar-light",
-  //   "bg-light",
-  //   "justify-content-between"
-  // );
-  // nav.innerHTML = `
-  // <a class="navbar-brand">The Online Library</a>
-  // <form class="form-inline" onsubmit="return search_books()">
-  //   <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-box" />
-  //   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  //   <div style="display:inline; id=profile-container">
-  //     <button class="btn btn-outline-success my-2 my-sm-0" id="signIn">
-  //       <a href="${pathRoot}/Components/SignIn.html">Sign In</a>
-  //     </button>
-  //     <button class="btn btn-outline-success my-2 my-sm-0" id="signUp">
-  //       <a href="${pathRoot}/Components/SignUp.html">Sign Up</a>
-  //     </button>
-  //   </div>
-  // </form>
-  // `;
   document.body.prepend(generateNav());
 
-  if(goBack) goBack();//window.history.back();
+  if(goBack) goBack();
 }
 
 function goToPage (path){
   alink = document.createElement("a");
   alink.href=path;
   alink.click();
+}
+
+function search_books() {
+  let search_term = document.getElementById('search-box').value.toLowerCase()
+  let search_results = []
+  let AllBooks = JSON.parse(localStorage.getItem("ALLBooks"));
+  for (let i = 0; i < AllBooks.length; i++) {
+      if (AllBooks[i].Title.toLowerCase().includes(search_term) ||
+          AllBooks[i].Author.toLowerCase().includes(search_term)) {
+          search_results.push(AllBooks[i])
+      }
+  }
+  sessionStorage.setItem(`${search_term}`, JSON.stringify(search_results))
+  let path =`../Components/BrowseBooks.html?search_key=${search_term}`
+  window.location.assign(path);
+  return false;
 }

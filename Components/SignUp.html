@@ -11,7 +11,7 @@
       generateNavBar();
       if (JSON.parse(localStorage.getItem("LoggedIn")) === "True") window.history.back()
     </script>
-    <form onsubmit="return createAccount()" action="SignIn.html" style="border:1px solid #ccc">
+    <form method= "redirectAction" onsubmit="return createAccount()" action="SignIn.html" style="border:1px solid #ccc">
         <div class="container">
           <h1 style="color:white;">Sign Up</h1>
           <p style="color:white;">Please fill in this form to create an account.</p>

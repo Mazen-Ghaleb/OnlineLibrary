@@ -42,10 +42,6 @@ if (localStorage.getItem("accounts") === null)
     localStorage.setItem("accounts", JSON.stringify(arrAccounts))
 }
 
-// var arrAccounts = JSON.parse(localStorage.getItem("accounts"));
-// for (let i = 0; i < arrAccounts.length; i++)
-//     arrAccounts[i] = User(arrAccounts[i].userName,arrAccounts[i].userMail,arrAccounts[i].userPassword, arrAccounts[i].createDate, arrAccounts[i].role);
-// console.log(arrAccounts)
 
 var arrAccounts = JSON.parse(localStorage.getItem("accounts"));
 console.log(arrAccounts)
@@ -93,22 +89,16 @@ function createAccount() {
         }
     }
     if(accountCreated){
-        window.location.assign("./SignIn.html");
+        // alink = document.createElement("a");
+        // alink.href="../Components/SignIn.html";
+        // alink.click();
+        //goToPage("./SignIn.html")
+        //window.location.assign("./SignIn.html");
         }
     return accountCreated;
 }
 
 function login(email,password) {    
-    // var arrAccounts = JSON.parse(localStorage.getItem("accounts"));
-    // console.log(arrAccounts)
-    // for (let i = 0; i < arrAccounts.length; i++)
-    //     arrAccounts[i] = new User(arrAccounts[i].userName,
-    //         arrAccounts[i].userMail,
-    //         arrAccounts[i].userPassword,
-    //         arrAccounts[i].createDate,
-    //         arrAccounts[i].role);
-    // console.log(arrAccounts)
-
     found = false;
     logged = false;
 
@@ -136,7 +126,8 @@ function login(email,password) {
     }
 
     if(logged){
-        goToPage("../index.html")
+        //window.history.pushState("", "", '../index.html');
+        //goToPage("")
         // alink = document.createElement("a");
         // alink.href="../index.html";
         // alink.click();
@@ -178,6 +169,49 @@ function resetPassword(oldPassword,newPassword,repeatPassword) {
             break;
         }
     }
-
     return changed;
+}
+
+function generateCardsForAllMembers(){
+    //get div with id cardsDiv
+    let cardsDiv = document.getElementById("cardsDiv");
+    //get all books from local storage
+    let allAccounts = JSON.parse(localStorage.getItem("accounts"));
+    //loop through all books
+    for (const account of allAccounts){
+        let acc = UserFromJson(account);
+        cardsDiv.innerHTML += `
+        <div class="card" style="width:16em; height: 32em; margin-top: 10px; margin-bottom: 10px;">
+        <img id="cardMemeberProfile" width:10em; class="card-img-top" alt="Card member cap" src="../media/profile.png">
+        <div class="card-body">
+          <h5 id="card" class="card-title">${acc.getUserName()}</h5>
+          <h6 id="cardUserMail" class="card-subtitle mb-2 text-muted">${acc.getUserMail()}</h6>
+          <p id="cardUserCreateDate" class="card-text">Created at: ${acc.getcreateDate()}</p>
+          <p id="cardUserRole" class="card-text">Role: ${acc.getRole()}</p>
+          <a href="../Components/Profile.html?accountEmail=${acc.getUserMail()}" class="card-link">Profile Link</a>
+        </div>
+      </div>
+      `
+    }
+}
+
+function display_Profile_details(){
+    accountEmail = decodeURI(location.href.split("=")[1]);
+    let accounts = JSON.parse(localStorage.getItem("accounts"));
+    var selectedAccount = null;
+    for (const account of accounts){
+        if (accountEmail == account.userMail){
+            selectedAccount = account;
+            break;
+        }
+    } 
+    if (selectedAccount == null) {alert("NO BOOK CHOSEN"); return;}
+    document.getElementById("profilePicture").setAttribute("src", `../media/profile.png`)
+    document.getElementById("cardName").innerText = `${selectedAccount.userName}`;
+
+    document.getElementById("cardEmail").innerText = `${selectedAccount.userMail}`;
+    document.getElementById("cardPublishDate").innerText = `since: ${selectedAccount.createDate}`;
+    document.getElementById("cardRole").innerText = `Role: ${selectedAccount.role}`;
+
+    console.log(selectedBook);
 }
