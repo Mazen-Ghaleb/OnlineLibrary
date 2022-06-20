@@ -1,5 +1,5 @@
 let pathRoot = "..";
-if (window.location.pathname.includes("index.html") || window.location.pathname==="/") pathRoot = ".";
+if(document.IS_INDEX) pathRoot = ".";
 
 function generateNavBar() {
   let head = document.getElementsByTagName("head")[0];
@@ -129,6 +129,6 @@ function search_books() {
   }
   sessionStorage.setItem(`${search_term}`, JSON.stringify(search_results))
   let path =`${pathRoot}/Components/BrowseBooks.html?search_key=${search_term}`
-  window.location.assign(path);
+  window.location.href = path;
   return false;
 }
