@@ -128,7 +128,7 @@ function search_books() {
       }
   }
   sessionStorage.setItem(`${search_term}`, JSON.stringify(search_results))
-  let path =`../Components/BrowseBooks.html?search_key=${search_term}`
+  let path =`${pathRoot}/Components/BrowseBooks.html?search_key=${search_term}`
   window.location.assign(path);
   return false;
 }
