@@ -38,7 +38,7 @@ if (localStorage.getItem("accounts") === null)
         new User("Book Keeper","bookkeeper@library.com","bookkeeper","19/06/2020","Admin"),
 
         new User("Youssef Maher","ymaher@912.com","YMAHER99_DOTa2@su","28-04-2021"),
-        new User("Mazen Motafa","mazen@mazen.com","Mazeeeeeen","19/06/2022"),
+        new User("Mazen Mostafa","mazen@mazen.com","Mazeeeeeen","19/06/2022"),
         new User("Mostafa Lotfy","lotfy@lotfy.com","LOTFYYYYY","9/09/2021"),
 
         new User("Mohamed Mokhtar","mokh@gmail.com","m0khtar222","2/11/2020"),
